@@ -40,6 +40,7 @@ func setup(new_direction: Vector3, new_speed: float, new_damage: float, color: C
     speed = new_speed
     damage = new_damage
     _life = lifetime
+    reset_physics_interpolation()
 
     if _runtime_material != null:
         _runtime_material.albedo_color = color

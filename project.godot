@@ -115,6 +115,10 @@ aim={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Enemy"
 
+[physics]
+
+common/physics_interpolation=true
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

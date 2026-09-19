@@ -16,6 +16,7 @@ var _recovery: float = 0.0
 var active_decorations: int = 0
 
 func _ready() -> void:
+    physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
     init_palette()
     _actor = get_tree().get_first_node_in_group("player") as Node3D
     drone = _drone()

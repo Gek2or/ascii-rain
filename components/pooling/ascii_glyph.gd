@@ -31,6 +31,7 @@ func on_pool_recycled() -> void:
 func configure(text: String, world_position: Vector3, color: Color, font_size: int,
         start_scale: float, end_position: Vector3, duration: float,
         outline_size: int, outline_alpha: float) -> void:
+    physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
     if _label == null:
         _request_recycle()
         return

@@ -43,6 +43,7 @@ var current_weapon: int = WEAPON_PULSE
 
 var _gravity: float = 20.0
 var _pitch: float = -0.18
+var _pending_yaw: float = 0.0
 var _shot_timer: float = 0.0
 var _dash_timer: float = 0.0
 var _dash_cd: float = 0.0
@@ -72,19 +73,32 @@ func _ready() -> void:
     _rng.randomize()
     var spring: SpringArm3D = $CameraPivot/SpringArm3D
     spring.add_excluded_object(get_rid())
+    camera_pivot.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
+    $Visual.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
+    reset_physics_interpolation()
     floor_snap_length = 0.30
     floor_stop_on_slope = true
     floor_max_angle = deg_to_rad(48.0)
     weapon_controller.weapon_changed.connect(_on_weapon_controller_changed)
     current_weapon = weapon_controller.current_index
     if not _is_mobile_runtime():
-        Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+        Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if OS.has_feature("web") else Input.MOUSE_MODE_CAPTURED
     health_changed.emit(health, max_health)
     xp_changed.emit(xp, xp_needed, level)
     credits_changed.emit(credits)
     _emit_inventory()
     _emit_weapon()
     ACTOR_STYLE.apply($Visual, true)
+
+func _input(event: InputEvent) -> void:
+    if not control_enabled:
+        return
+    if OS.has_feature("web") and event is InputEventMouseButton:
+        var button: InputEventMouseButton = event as InputEventMouseButton
+        if button.pressed and button.button_index == MOUSE_BUTTON_LEFT and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+            Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+            _ui_fire_release_required = true
+            get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
     if not control_enabled:
@@ -95,11 +109,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
     if not control_enabled:
+        _pending_yaw = 0.0
         velocity.x = move_toward(velocity.x, 0.0, ground_deceleration * delta)
         velocity.z = move_toward(velocity.z, 0.0, ground_deceleration * delta)
         move_and_slide()
         return
 
+    rotate_y(_pending_yaw)
+    _pending_yaw = 0.0
     var ui_locked: bool = Time.get_ticks_msec() < _ui_lock_until_msec
     if _ui_fire_release_required and not Input.is_action_pressed("shoot"):
         _ui_fire_release_required = false
@@ -184,7 +201,7 @@ func apply_look_delta(delta_pixels: Vector2, sensitivity_scale: float = 1.0) -> 
         return
     var aim_sensitivity: float = 0.62 if Input.is_action_pressed("aim") else 1.0
     var final_sensitivity: float = mouse_sensitivity * SettingsManager.mouse_sensitivity_scale * sensitivity_scale * aim_sensitivity
-    rotate_y(-delta_pixels.x * final_sensitivity)
+    _pending_yaw -= delta_pixels.x * final_sensitivity
     _pitch = clamp(_pitch - delta_pixels.y * final_sensitivity, -1.05, 0.55)
     camera_pivot.rotation.x = _pitch
 

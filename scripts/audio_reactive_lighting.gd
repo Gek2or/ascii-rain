@@ -33,6 +33,7 @@ var _chaos_target_tint: Color = Color(0.08, 0.82, 1.0)
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
+    physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
     process_mode = Node.PROCESS_MODE_ALWAYS
     _rng.randomize()
     for entry in get_tree().get_nodes_in_group("audio_reactive_lights"):

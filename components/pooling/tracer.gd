@@ -29,6 +29,7 @@ func on_pool_recycled() -> void:
     _recycle_requested = false
 
 func configure(from: Vector3, to: Vector3, color: Color, duration: float = 0.055) -> void:
+    physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
     var distance: float = from.distance_to(to)
     if distance <= 0.05:
         _request_recycle()

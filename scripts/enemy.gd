@@ -85,6 +85,7 @@ var _core_base_energy: float = 1.45
 @onready var core_light: OmniLight3D = $Visual/CoreLight
 
 func _ready() -> void:
+    visual.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
     add_to_group("enemies")
     floor_snap_length = 0.60
     floor_constant_speed = true

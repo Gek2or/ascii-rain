@@ -19,6 +19,7 @@ var _clear_samples: int = 0
 var _raw_pass_active: bool = true
 
 func _ready() -> void:
+    physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
     process_priority = 100
     _world_camera = _player.get_node("CameraPivot/SpringArm3D/Camera3D") as Camera3D
     _viewport.world_3d = get_viewport().world_3d

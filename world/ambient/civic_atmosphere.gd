@@ -19,6 +19,7 @@ var _duck_garden: float = 1.0
 var _repair_time: float = 0.0
 
 func _ready() -> void:
+    physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
     init_palette()
     carrier=Node3D.new()
     carrier.name="IndexCourier"

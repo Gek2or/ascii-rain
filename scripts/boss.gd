@@ -49,6 +49,7 @@ var _attack_cue: Node3D = null
 @onready var back_fin_r: MeshInstance3D = $Visual/BackFinR
 
 func _ready() -> void:
+    visual.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
     add_to_group("enemies")
     add_to_group("boss")
     health = max_health

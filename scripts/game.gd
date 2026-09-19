@@ -150,7 +150,7 @@ func _apply_runtime_profile() -> void:
     if mobile_profile:
         controls_label.text = "TOUCH: MOVE / LOOK   FIRE / JUMP / DASH / WPN / USE / SET"
     else:
-        controls_label.text = "WASD MOVE  //  MOUSE AIM  //  LMB FIRE  //  SPACE JUMP  //  SHIFT DASH  //  ESC SETTINGS"
+        controls_label.text = "CLICK TO CAPTURE MOUSE  //  WASD MOVE  //  MOUSE AIM  //  LMB FIRE  //  SPACE JUMP  //  SHIFT DASH  //  ESC SETTINGS"
 
     var material: ShaderMaterial = ascii_rect.material as ShaderMaterial
     if material != null:
@@ -405,6 +405,7 @@ func _spawn_enemy_near(center: Vector3, intensity: float = 1.0, request: Diction
         return
     add_child(enemy)
     enemy.global_position = spawn_position
+    enemy.reset_physics_interpolation()
     enemy.call("setup", archetype, elite_kind, difficulty * maxf(0.9, intensity))
     enemy.connect("died", Callable(self, "_on_enemy_died"))
     var event_owner: Node=request.get("owner",null) as Node
@@ -549,6 +550,7 @@ func _spawn_boss() -> void:
     boss = BOSS_SCENE.instantiate()
     add_child(boss)
     boss.global_position = teleporter.global_position + Vector3(0.0, 0.5, -10.0)
+    boss.reset_physics_interpolation()
     boss.setup(maxf(1.0, difficulty * 0.92))
     boss.health_changed.connect(_on_boss_health_changed)
     boss.phase_changed.connect(_on_boss_phase_changed)

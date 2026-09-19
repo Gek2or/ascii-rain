@@ -13,6 +13,7 @@ var cue: Node3D = null
 func arm(host: Node, feet: Vector3) -> void:
     host.add_child(self)
     global_position = feet
+    reset_physics_interpolation()
     add_to_group("hostile_hazards")
     cue = CUES.ring(host, feet, radius, remaining, tint, 24)
     CUES.marker(self, feet, label_text, remaining, tint)
