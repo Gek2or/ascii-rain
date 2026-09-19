@@ -22,11 +22,10 @@ Then open [http://localhost:8000](http://localhost:8000).
 
 ## Deploy with GitHub Pages
 
-1. Push this repository to GitHub.
-2. Open **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select the `main` branch and the `/ (root)` folder, then save.
-5. Wait for the Pages build and open the URL GitHub displays in the Pages settings.
+1. Open **Settings → Pages**.
+2. Under **Build and deployment**, choose **Deploy from a branch**.
+3. Select the `main` branch and the `/ (root)` folder, then save.
+4. Wait for the Pages build and open the URL GitHub displays in the Pages settings.
 
 The site is static, so the repository root can be served directly; no workflow or build command is required.
 
@@ -49,3 +48,4 @@ The animation uses the Canvas 2D API and `requestAnimationFrame`. Each column ke
 - Enable reduced motion in the operating system and reload; the animation should start paused.
 
 There is no automated test suite because this is a dependency-free single-page visual experiment.
+
