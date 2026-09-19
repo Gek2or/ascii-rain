@@ -1,0 +1,5 @@
+Godot Engine v4.8.dev.mono.gh.3756fbb2c (2026-09-11 16:19:17 UTC) - https://godotengine.org
+
+CITY_COLLISION_BODIES: 413 (legacy attachments: 25)
+CITY_NAV_GRAPH: nodes=4312 remaining_bake_ticks=115
+CITY_NAV_NATIVE: 16 checks / 0 failures

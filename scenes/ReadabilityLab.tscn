@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://world/readability_lab.gd" id="1_lab"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/mobile_controls.gd" id="3_touch"]
+[ext_resource type="Shader" path="res://shaders/ascii_post.gdshader" id="4_ascii"]
+[ext_resource type="Texture2D" path="res://assets/ascii_atlas.png" id="5_atlas"]
+
+
+[sub_resource type="Environment" id="Environment"]
+background_mode = 1
+background_color = Color(0.009, 0.014, 0.032, 1)
+background_energy_multiplier = 1.08
+ambient_light_source = 2
+ambient_light_sky_contribution = 0.0
+ambient_light_color = Color(0.64, 0.65, 0.69, 1)
+ambient_light_energy = 0.95
+tonemap_mode = 2
+fog_enabled = true
+fog_sky_affect = 0.08
+fog_light_color = Color(0.12, 0.16, 0.24, 1)
+fog_light_energy = 1.10
+fog_density = 0.0018
+
+
+[sub_resource type="ShaderMaterial" id="AsciiMaterial"]
+shader = ExtResource("4_ascii")
+shader_parameter/glyph_atlas = ExtResource("5_atlas")
+
+[node name="ReadabilityLab" type="Node3D"]
+script = ExtResource("1_lab")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment")
+
+[node name="MoonLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, -34, 0)
+light_color = Color(0.76, 0.80, 0.90, 1)
+light_energy = 1.12
+shadow_enabled = false
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector3(0, 0.1, 10)
+
+[node name="MobileControls" type="CanvasLayer" parent="."]
+script = ExtResource("3_touch")
+
+[node name="PostFX" type="CanvasLayer" parent="."]
+layer = 90
+
+[node name="ASCII" type="ColorRect" parent="PostFX"]
+material = SubResource("AsciiMaterial")
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 100

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/weapon_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"scatter_cannon"
+display_name = "SCATTER CANNON"
+damage_multiplier = 0.46
+fire_rate_multiplier = 0.34
+pellets = 7
+spread_degrees = 4.6
+tracer_color = Color(1, 0.42, 0.05, 1)
+stagger_power = 1.15
+shot_recoil = 1.55
+muzzle_flash_duration = 0.105
+muzzle_light_energy = 10.5
+intrinsic_chain_jumps = 0
+intrinsic_chain_damage_ratio = 0.0
+hud_suffix = "7 PELLETS"

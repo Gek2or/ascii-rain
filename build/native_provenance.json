@@ -1,0 +1,12 @@
+{
+  "engine_version": "4.8.dev.mono.gh.3756fbb2c",
+  "binary_sha256": "9ce3b96544a9b5c5883c053ed6b748eb327da039e9523d7350174d44de24bdea",
+  "mode": "native debug template, temporary ImageTexture/WAV remaps; NOT editor import",
+  "tests": [
+    {
+      "name": "settings_v013",
+      "result": "PASS",
+      "marker": "SETTINGS_013_NATIVE:"
+    }
+  ]
+}

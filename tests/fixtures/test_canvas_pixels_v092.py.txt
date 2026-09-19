@@ -1,0 +1,44 @@
+import sys,json,numpy as np
+from pathlib import Path
+from PIL import Image,ImageDraw,ImageFont
+import mesa_canvas_probe as gl
+P=Path(__file__).resolve().parents[1];OLD=P
+old=gl.program(P/'tests/fixtures/ascii_post_v0_9_1.gdshader.txt');new=gl.program(P/'shaders/ascii_post.gdshader')
+def img(p):return np.asarray(Image.open(p).convert('RGB'),dtype=np.float32)/255
+oldatlas=img(OLD/'assets/ascii_atlas.png')
+settings=dict(exposure=1.,glyph_gain=1.4,edge_gain=.45,bloom_strength=0.,readability=.65,background_calm=.4,color_saturation=.68,surface_fill=.50)
+legacy=dict(exposure=1.216,glyph_gain=1.78,edge_gain=.9,bloom_strength=0.,readability=.98,background_calm=1.,color_saturation=.85)
+checks=[]
+for w in range(4,11):
+ h=int(w*1.5+.5);atlas=img(P/f'assets/ascii_prefiltered/glyphs_{w}.png');coverage=img(P/f'assets/ascii_prefiltered/coverage_{w}.png')
+ previous=-1
+ for value in [0,.005,.01,.02,.05,.1,.2,.4,.7,.9]:
+  source=np.full((h*20,w*28,3),value,dtype=np.float32)
+  result=gl.render(new,source,atlas,coverage,cell_px=w,**settings)
+  mean=result[:,:,:3].mean(dtype=np.float64)
+  toe=np.clip(value/.012,0,1);toe=toe**2*(3-2*toe)
+  expected=np.clip(((1-.65)*value+.65*(value**.78)*.92)*toe,0,.94)
+  assert abs(mean-expected)<.0001,(w,value,mean,expected)
+  assert mean>=previous-1e-5,(w,value,previous,mean)
+  assert np.isfinite(result).all() and result.min()>=0 and result.max()<=1.001
+  previous=mean
+  checks.append(dict(width=w,input=value,output=float(mean),expected=float(expected)))
+# Changes to contrast/fill must not turn a surface darker overall.
+for calm in [0,.4,1]:
+ for fill in [.15,.34,.55]:
+  for gain in [1.,1.4,2.2]:
+   source=np.full((9*20,6*28,3),.2,dtype=np.float32)
+   params={**settings,'background_calm':calm,'surface_fill':fill,'glyph_gain':gain}
+   result=gl.render(new,source,img(P/'assets/ascii_prefiltered/glyphs_6.png'),img(P/'assets/ascii_prefiltered/coverage_6.png'),cell_px=6,**params)
+   expected=(1-.65)*.2+.65*(.2**.78)*.92
+   assert abs(result[:,:,:3].mean(dtype=np.float64)-expected)<.0001
+legacy_cases=[]
+for val in [.1,.2]:
+ src=np.full((120,160,3),val,dtype=np.float32)
+ r=gl.render(old,src,oldatlas,cell_px=4,**legacy)
+ legacy_cases.append(float(r[:,:,:3].mean(dtype=np.float64)))
+assert legacy_cases[1]<legacy_cases[0],legacy_cases
+print('Legacy .1/.2 test outputs:',legacy_cases)
+print('70 tone/width + 27 contrast-invariance tests: PASS')
+info={'driver':gl.getstr(0x1F01).decode(),'gl_version':gl.getstr(0x1F02).decode(),'scope':'GLSL translation of actual canvas fragment via Mesa software EGL; NOT Godot runtime / parser / GPU integration','tone_tests':checks,'contrast_invariance_cases':27,'legacy_brightness_reversal':{'input':[.1,.2],'output':legacy_cases},'all_passed':True}
+(P/'build/mesa_probe.json').write_text(json.dumps(info,indent=2))

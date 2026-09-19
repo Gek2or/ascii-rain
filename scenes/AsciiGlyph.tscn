@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://components/pooling/ascii_glyph.gd" id="1_ascii_glyph"]
+
+[node name="AsciiGlyph" type="Node3D"]
+script = ExtResource("1_ascii_glyph")
+
+[node name="Glyph" type="Label3D" parent="."]
+visible = false
+billboard = 1
+no_depth_test = true
+modulate = Color(1, 1, 1, 0)
+outline_size = 2

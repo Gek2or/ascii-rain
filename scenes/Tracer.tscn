@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://components/pooling/tracer.gd" id="1_tracer"]
+
+[node name="Tracer" type="MeshInstance3D"]
+cast_shadow = 0
+script = ExtResource("1_tracer")

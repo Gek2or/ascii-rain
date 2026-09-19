@@ -1,0 +1,131 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/boss.gd" id="1_boss"]
+
+[sub_resource type="CapsuleShape3D" id="BossShape"]
+radius = 1.45
+height = 4.4
+
+[sub_resource type="BoxMesh" id="TorsoMesh"]
+size = Vector3(3.3, 2.7, 1.8)
+
+[sub_resource type="BoxMesh" id="HeadMesh"]
+size = Vector3(1.65, 0.85, 1.25)
+
+[sub_resource type="BoxMesh" id="LimbMesh"]
+size = Vector3(0.65, 2.65, 0.68)
+
+[sub_resource type="SphereMesh" id="CoreMesh"]
+radius = 0.36
+height = 0.72
+
+[sub_resource type="StandardMaterial3D" id="BossMat"]
+albedo_color = Color(0.025, 0.03, 0.045, 1)
+metallic = 0.78
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="TrimMat"]
+albedo_color = Color(0.19, 0.22, 0.28, 1)
+metallic = 0.9
+roughness = 0.23
+
+[sub_resource type="StandardMaterial3D" id="CoreMat"]
+shading_mode = 0
+albedo_color = Color(1, 0.05, 0.02, 1)
+emission_enabled = true
+emission = Color(1, 0.02, 0.0, 1)
+emission_energy_multiplier = 8.0
+
+[sub_resource type="BoxMesh" id="ShoulderMesh"]
+size = Vector3(1.25, 0.75, 1.5)
+
+[node name="Boss" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_boss")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 2.2, 0)
+shape = SubResource("BossShape")
+
+[node name="Visual" type="Node3D" parent="."]
+position = Vector3(0, 2.2, 0)
+
+[node name="Torso" type="MeshInstance3D" parent="Visual"]
+mesh = SubResource("TorsoMesh")
+material_override = SubResource("BossMat")
+
+[node name="Head" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 1.72, -0.18)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("TrimMat")
+
+[node name="Core" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.15, -0.94)
+mesh = SubResource("CoreMesh")
+material_override = SubResource("CoreMat")
+
+[node name="ShoulderL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-2.0, 0.72, 0)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("TrimMat")
+
+[node name="ShoulderR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(2.0, 0.72, 0)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("TrimMat")
+
+[node name="ArmL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-2.0, -0.85, 0)
+rotation_degrees = Vector3(0, 0, -6)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("BossMat")
+
+[node name="ArmR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(2.0, -0.85, 0)
+rotation_degrees = Vector3(0, 0, 6)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("BossMat")
+
+[node name="LegL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.92, -2.55, 0.1)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("BossMat")
+
+[node name="LegR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.92, -2.55, 0.1)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("BossMat")
+
+[node name="ChestArmor" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.62, -1.02)
+scale = Vector3(1.55, 0.72, 0.18)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("TrimMat")
+
+[node name="EyeStrip" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 1.78, -0.84)
+scale = Vector3(1.0, 0.12, 0.18)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("CoreMat")
+
+[node name="BackFinL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-1.2, 1.15, 0.98)
+rotation_degrees = Vector3(-12, 0, -18)
+scale = Vector3(0.42, 0.95, 0.26)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("TrimMat")
+
+[node name="BackFinR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(1.2, 1.15, 0.98)
+rotation_degrees = Vector3(-12, 0, 18)
+scale = Vector3(0.42, 0.95, 0.26)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("TrimMat")
+
+[node name="CoreLight" type="OmniLight3D" parent="Visual"]
+position = Vector3(0, 0.15, -1.28)
+light_color = Color(1, 0.08, 0.02, 1)
+light_energy = 3.2
+omni_range = 7.0
+shadow_enabled = false

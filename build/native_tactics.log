@@ -1,0 +1,5 @@
+Godot Engine v4.8.dev.mono.gh.3756fbb2c (2026-09-11 16:19:17 UTC) - https://godotengine.org
+
+NAV_WALL: final=(-1.310102, 0.000838, -7.288703) detour=6.98033237457275
+NAV_RAMP: final=(15.0, 2.125816, 2.497463)
+ENCOUNTER_TACTICS_NATIVE: 38 checks / 0 failures

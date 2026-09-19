@@ -1,0 +1,134 @@
+ASCII//RAIN v0.13 — REFERENCE CITY & DISTRICT EVENTS
+
+FORMAT: Full Godot source project. NOT APK / EXE. Cumulative update, not a new project.
+BASE: ASCII_RAIN_Godot_v0_12b_ARCHIVES_GARDENS.zip
+BASE SHA-256: 5e373033038aa003019fed316f53757bbba3f0213bd893c94daeb6755665e538
+ROOT: ASCII_RAIN_v0_13_REFERENCE_CITY/
+
+IMPLEMENTED
+- Visual recovery: discrete stable glyph identity, darker between-glyph space,
+  bounded strokes, edge-only bar selection, no random alphabet and no full-size
+  unfiltered 3D overlay. Existing 4–10px atlases retained.
+- Reference Mood / Readable Combat / Mobile Safe styles. One-time render schema-5
+  migration backs up old settings; audio, controls, ambience and archive retained.
+- Broader dark player silhouette with separate edge/back highlights. Existing
+  procedural locomotion/IK and weapon handling remain; not a new skeleton.
+- Pilot stepped market frontage on existing wall footprints, warm local accents.
+- Utility Depths: actual -6m hall beneath street, two matching render/collision
+  cuts and two walkable ramps, pressure machinery and finite-distance ambience.
+- Rooftop Relay: three linked +10m roof sections, two independent ascents,
+  cover, relay mast and rotating antenna. Existing four districts retained.
+- Multi-height A* now includes below-street routes, no unrelated ground spawn
+  fallback on basement/roof bands, and street ascent/descent guidance.
+- Six per-district enemy compositions using the existing five archetypes.
+- Six OPTIONAL console variations of a shared defense activity: warning, two
+  waves, synchronization, clear defenders, separate single reward claim.
+  Not six unrelated minigames. At least three successful spawns required.
+- Leaving/dying/boss transition aborts without reward; pause freezes event/hazards.
+  Optional activities do not become six mandatory tasks in the main run.
+- Utility's event adds delayed pressure vents in side bays; subterranean line
+  warnings now preserve negative Y rather than clamping to street height.
+- Old caches redistributed (still 14), original weapons/music/2 story artifacts
+  retained. New areas reuse existing atmosphere loops, not a newly composed song.
+
+TESTS EXECUTED ON THE DELIVERED RUNTIME SOURCES
+Source reserved-name/style guard: PASS
+Resource/scene/autoload/input/pooling-hook static validation: PASS
+Current-release Python source/reference contracts: 25/25 PASS
+Protected v0.12b assets/controller/animation/combat/data/story/reference: 67 hashes PASS
+Native Utility/roofs/floor/spawn/player/chaser checks: 67/67 PASS
+Native six optional events, rewards/abort/pause/hazards: 98/98 PASS
+Native graphics migration/preferences/archive preservation: 21/21 PASS
+Native Archives/Gardens regression: 76/76 PASS
+Native Market/Transit regression: 70/70 PASS
+Native combat tactics regression: 38/38 PASS
+Native whole-city navigation/collision/spawn regression: 16/16 PASS
+Native run-state/relic regression: 73/73 PASS
+Native Main run-loop integration: 42/42 PASS
+Native movement/shooting/settings smoke: PASS
+Native synthetic two-finger touch/courtyard/occlusion smoke: PASS
+Native actual shader pixel checks (4–10px): 133/133 PASS
+Native Main, choice, Market, Utility, roofs and style captures: PASS
+
+Historical release-specific Python/render target tests are retained, not all rerun:
+several intentionally assert the superseded grey-bed formula. The current 25
+contracts and 133 native pixel cases are reported, not the old release's totals.
+The old 68 Market/Transit assertions now total 70 because the supported-cache loop
+also visits two rooftop cache placements. This is not 70 new features.
+Individual final log hashes and results: build/native_suite_results.json.
+
+WARNINGS / OPEN QA ITEM
+- general_smoke completed all assertions but emits a warning about 2 ObjectDB
+  instances remaining at process exit. This is NOT claimed to be resolved and
+  cannot establish whether live-game memory is stable; profile lifecycle further.
+- Software Xvfb graphics reports unsupported V-Sync mode changes.
+- Final suite logs contain no SCRIPT ERROR / Parse Error / ERROR lines.
+  Passing assertions do not mean warning-free or bug-free software.
+
+TRAVERSAL OBSERVATIONS (scripted fixtures, not human playthrough)
+Utility south descent player: (-66.0, -5.999838, -13.67016)
+Utility north ascent player:  (-42.0, 0.000872, -44.53758)
+Roof west ascent player:      (-29.0, 10.00051, -60.64574)
+Roof east descent player:     (25.5, 0.000736, -22.42404)
+Utility chaser: (-61.27952, -5.999162, -17.3613), target=(-60,-5.92,-20)
+Roof chaser:    (-29.31107, 10.00083, -63.01731), target=(-29,10.08,-66)
+No intermediate teleport used on these measured traversals. Other integration
+fixtures deliberately place actors, force damage or advance state timers.
+Current full city graph: 4312 valid points in the dedicated navigation fixture.
+
+BUGS FOUND AND REPAIRED DURING NATIVE TESTING
+- A one-metre mismatch between pavement cut and ramp lip caused actors to fall
+  behind the ramp. Both cut rectangles now end at the physical ramp endpoints.
+- Utility entrance headers were too low for the conservative horde-clearance
+  capsule. Headers now have adequate headroom.
+- East roof ascent intersected a pre-existing archive building; moved to x25.5.
+- Gardens event console moved to an open ground approach for safe defender anchors.
+
+ENGINE / METHOD
+Godot version: 4.8.dev.mono.gh.3756fbb2c
+Official Linux DEBUG EXPORT TEMPLATE from previously retrieved Godot CI.
+Binary SHA-256: 9ce3b96544a9b5c5883c053ed6b748eb327da039e9523d7350174d44de24bdea
+Compatibility OpenGL4.5, Mesa25.0.7-2 llvmpipe LLVM19.1.7, Xvfb.
+Actual GDScript/physics/shader execution, not Python game simulation.
+Temporary native ImageTexture/AudioStreamWAV serialization/remaps plus class cache
+allow tests without a functioning editor import. These QA resources, engine,
+SDK, system fonts, caches and isolated user profiles are NOT in the release ZIP.
+Native source/test runner and reproduction commands are included under tools/.
+
+LIMITS / NOT EXECUTED
+- Normal stable Godot Editor import / Project Manager UI on Windows or Android.
+- Physical GPUs, touchscreens, stable 4.7/4.3, hardware FPS/memory/thermal profiling.
+- APK/EXE compilation, export/signing, human complete-run/balance verification.
+- Final art/animation quality or equivalence to the approved generated concept.
+- Complete crowd avoidance, distinct nav agent sizes, flying/boss street AI,
+  ladders/lifts/moving-obstacle rebakes or interiors for every building.
+- WATCHER remains arena-driven. Roof screens block common firing lines but do not
+  certify every possible high-ground exploit as eliminated.
+Visuals remain a prototype. Clearer glyphs do not prove final artistic quality.
+
+CAPTURES
+Real Godot frames, deliberately staged positions/cameras, no image generation.
+reference_market_oldbed uses the CURRENT scene with the OLD shader and .64 bed;
+it is not a separate earlier-build playthrough. Raw suffix disables ASCII only
+for geometry inspection. Mobile-style capture is Linux, NOT a phone screenshot.
+
+OPEN
+Extract into a NEW folder; Import the extracted project.godot; F5.
+Old render preferences migrate once with a backup at
+user://ascii_rain_settings_before_0_13.cfg; controls/audio/archive not erased.
+ESC/SET -> VISUAL STYLE: Reference Mood / Readable Combat / Mobile Safe.
+Starter relic -> any 2 districts -> teleporter/WATCHER -> optional artifact -> exit.
+Optional terminal: E / USE, defend, then E / USE once to claim completion reward.
+Utility street approaches: southwest-of-service (-66,0,12), north (-42,0,-45).
+Roof street approaches: (-29,0,-23) and (25.5,0,-23).
+
+PACKAGING
+ZIP CRC, safe paths, parent-first directory entries, both sequential extraction
+modes and per-file hashes are checked by tools/package_project.py.
+Final archive size/SHA/counts are appended to the external release report only,
+so the ZIP does not contain a self-referential archive hash.
+
+SOURCE COUNTS
+GDScript: 88 (includes native test scripts); scenes: 16; data .tres: 20.
+Autoloads: 5; InputMap actions: 14; validator sees 11 literal input call names.
+Modified non-build files: 22; added non-build files: 20.

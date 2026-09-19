@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/reality_artifact.gd" id="1_artifact"]
+
+[node name="RealityArtifact" type="Node3D"]
+script = ExtResource("1_artifact")
+artifact_id = "memory_01"
+display_name = "PHOTOGRAPH // FAMILY IN SUNLIGHT"
+short_hint = "A physical image. No glyph layer. No system provenance."

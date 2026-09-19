@@ -1,0 +1,391 @@
+[gd_scene load_steps=25 format=3]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/player_animator.gd" id="2_anim"]
+[ext_resource type="Script" path="res://components/weapon/weapon_controller.gd" id="3_weapon_controller"]
+[ext_resource type="Script" path="res://components/inventory/inventory_component.gd" id="4_inventory_component"]
+[ext_resource type="Script" path="res://scripts/entity01_player_bridge.gd" id="5_entity_bridge"]
+[ext_resource type="PackedScene" path="res://godot/character/EntityVisual.tscn" id="6_entity_visual"]
+[ext_resource type="PackedScene" path="res://scenes/RawHeroOverlay.tscn" id="7_raw_hero_overlay"]
+[ext_resource type="Script" path="res://scripts/camera_zoom_controller.gd" id="8_camera_zoom"]
+
+[sub_resource type="CapsuleShape3D" id="PlayerShape"]
+radius = 0.34
+height = 2.12
+
+[sub_resource type="BoxMesh" id="TorsoMesh"]
+size = Vector3(0.76, 0.72, 0.42)
+
+[sub_resource type="BoxMesh" id="PelvisMesh"]
+size = Vector3(0.54, 0.28, 0.34)
+
+[sub_resource type="SphereMesh" id="HeadMesh"]
+radius = 0.235
+height = 0.47
+radial_segments = 16
+rings = 8
+
+[sub_resource type="CapsuleMesh" id="UpperArmMesh"]
+radius = 0.108
+height = 0.35
+radial_segments = 12
+rings = 4
+
+[sub_resource type="CapsuleMesh" id="ForearmMesh"]
+radius = 0.095
+height = 0.34
+radial_segments = 12
+rings = 4
+
+[sub_resource type="CapsuleMesh" id="ThighMesh"]
+radius = 0.135
+height = 0.46
+radial_segments = 12
+rings = 4
+
+[sub_resource type="CapsuleMesh" id="ShinMesh"]
+radius = 0.11
+height = 0.46
+radial_segments = 12
+rings = 4
+
+[sub_resource type="BoxMesh" id="BootMesh"]
+size = Vector3(0.23, 0.14, 0.34)
+
+[sub_resource type="BoxMesh" id="PackMesh"]
+size = Vector3(0.48, 0.60, 0.22)
+
+[sub_resource type="BoxMesh" id="GunMesh"]
+size = Vector3(0.16, 0.18, 1.12)
+
+[sub_resource type="SphereMesh" id="FlashMesh"]
+radius = 0.12
+height = 0.24
+
+[sub_resource type="StandardMaterial3D" id="PlayerMat"]
+emission_enabled = true
+emission = Color(0.025, 0.045, 0.085, 1)
+emission_energy_multiplier = 0.85
+albedo_color = Color(0.31, 0.36, 0.43, 1)
+metallic = 0.15
+roughness = 0.64
+
+[sub_resource type="StandardMaterial3D" id="GlowMat"]
+shading_mode = 0
+albedo_color = Color(0.84, 0.83, 0.66, 1)
+emission_enabled = true
+emission = Color(0.70, 0.74, 0.55, 1)
+emission_energy_multiplier = 1.4
+
+[sub_resource type="StandardMaterial3D" id="GunMat"]
+roughness = 0.28
+albedo_color = Color(0.11, 0.13, 0.17, 1)
+metallic = 0.3
+
+[sub_resource type="StandardMaterial3D" id="FlashMat"]
+shading_mode = 0
+albedo_color = Color(1, 0.28, 0.035, 1)
+emission_enabled = true
+emission = Color(1, 0.12, 0.01, 1)
+emission_energy_multiplier = 8.0
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_player")
+
+[node name="WeaponController" type="Node" parent="."]
+script = ExtResource("3_weapon_controller")
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("4_inventory_component")
+
+[node name="Entity01Bridge" type="Node3D" parent="."]
+script = ExtResource("5_entity_bridge")
+
+[node name="Entity01Visual" parent="Entity01Bridge" instance=ExtResource("6_entity_visual")]
+position = Vector3(0, 0.12, 0)
+
+[node name="RawHeroOverlay" parent="." instance=ExtResource("7_raw_hero_overlay")]
+
+[node name="CameraZoomController" type="Node" parent="."]
+script = ExtResource("8_camera_zoom")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("PlayerShape")
+position = Vector3(0, 1.06, 0)
+
+[node name="Visual" type="Node3D" parent="."]
+script = ExtResource("2_anim")
+position = Vector3(0, 1.24, 0)
+
+[node name="BodyRoot" type="Node3D" parent="Visual"]
+
+[node name="Torso" type="MeshInstance3D" parent="Visual/BodyRoot"]
+position = Vector3(0, 0.18, 0)
+mesh = SubResource("TorsoMesh")
+material_override = SubResource("PlayerMat")
+
+[node name="Pelvis" type="MeshInstance3D" parent="Visual/BodyRoot"]
+mesh = SubResource("PelvisMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.25, 0.02)
+
+[node name="Pack" type="MeshInstance3D" parent="Visual/BodyRoot"]
+mesh = SubResource("PackMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, 0.18, 0.25)
+
+[node name="HeadRoot" type="Node3D" parent="Visual/BodyRoot"]
+position = Vector3(0, 0.66, -0.02)
+
+[node name="Head" type="MeshInstance3D" parent="Visual/BodyRoot/HeadRoot"]
+mesh = SubResource("HeadMesh")
+material_override = SubResource("PlayerMat")
+
+[node name="Visor" type="MeshInstance3D" parent="Visual/BodyRoot/HeadRoot"]
+scale = Vector3(0.75, 0.20, 0.16)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("GlowMat")
+position = Vector3(0, 0.02, -0.22)
+
+[node name="ArmLPivot" type="Node3D" parent="Visual/BodyRoot"]
+rotation = Vector3(0.10, 0, -0.10)
+position = Vector3(-0.39, 0.39, 0)
+
+[node name="UpperArm" type="MeshInstance3D" parent="Visual/BodyRoot/ArmLPivot"]
+mesh = SubResource("UpperArmMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.175, 0)
+
+[node name="ForearmPivot" type="Node3D" parent="Visual/BodyRoot/ArmLPivot"]
+rotation = Vector3(-0.16, 0, 0)
+position = Vector3(0, -0.35, 0)
+
+[node name="Forearm" type="MeshInstance3D" parent="Visual/BodyRoot/ArmLPivot/ForearmPivot"]
+mesh = SubResource("ForearmMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.17, 0)
+
+[node name="ElbowGuard" type="MeshInstance3D" parent="Visual/BodyRoot/ArmLPivot/ForearmPivot"]
+position = Vector3(0, 0.02, -0.08)
+scale = Vector3(0.32, 0.24, 0.42)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("GunMat")
+
+[node name="Hand" type="MeshInstance3D" parent="Visual/BodyRoot/ArmLPivot/ForearmPivot"]
+position = Vector3(0, -0.34, -0.03)
+scale = Vector3(0.30, 0.34, 0.30)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("PlayerMat")
+
+[node name="ArmRPivot" type="Node3D" parent="Visual/BodyRoot"]
+rotation = Vector3(-0.16, 0, 0.12)
+position = Vector3(0.39, 0.39, 0)
+
+[node name="UpperArm" type="MeshInstance3D" parent="Visual/BodyRoot/ArmRPivot"]
+mesh = SubResource("UpperArmMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.175, 0)
+
+[node name="ForearmPivot" type="Node3D" parent="Visual/BodyRoot/ArmRPivot"]
+rotation = Vector3(-0.58, 0, 0)
+position = Vector3(0, -0.35, 0)
+
+[node name="Forearm" type="MeshInstance3D" parent="Visual/BodyRoot/ArmRPivot/ForearmPivot"]
+mesh = SubResource("ForearmMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.17, 0)
+
+[node name="ElbowGuard" type="MeshInstance3D" parent="Visual/BodyRoot/ArmRPivot/ForearmPivot"]
+position = Vector3(0, 0.02, -0.08)
+scale = Vector3(0.32, 0.24, 0.42)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("GunMat")
+
+[node name="Hand" type="MeshInstance3D" parent="Visual/BodyRoot/ArmRPivot/ForearmPivot"]
+position = Vector3(0, -0.34, -0.03)
+scale = Vector3(0.30, 0.34, 0.30)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("PlayerMat")
+
+[node name="LegLPivot" type="Node3D" parent="Visual/BodyRoot"]
+position = Vector3(-0.2, -0.25, 0.02)
+
+[node name="Thigh" type="MeshInstance3D" parent="Visual/BodyRoot/LegLPivot"]
+mesh = SubResource("ThighMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.23, 0)
+
+[node name="ShinPivot" type="Node3D" parent="Visual/BodyRoot/LegLPivot"]
+position = Vector3(0, -0.46, 0)
+
+[node name="Shin" type="MeshInstance3D" parent="Visual/BodyRoot/LegLPivot/ShinPivot"]
+mesh = SubResource("ShinMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.23, 0)
+
+[node name="Boot" type="MeshInstance3D" parent="Visual/BodyRoot/LegLPivot/ShinPivot"]
+mesh = SubResource("BootMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.46, -0.08)
+
+[node name="ShinArmor" type="MeshInstance3D" parent="Visual/BodyRoot/LegLPivot/ShinPivot"]
+scale = Vector3(0.78, 0.74, 0.32)
+mesh = SubResource("ShinMesh")
+material_override = SubResource("GunMat")
+position = Vector3(0, -0.23, -0.12)
+
+[node name="AnkleJoint" type="MeshInstance3D" parent="Visual/BodyRoot/LegLPivot/ShinPivot"]
+scale = Vector3(0.28, 0.22, 0.28)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("GunMat")
+position = Vector3(0, -0.44, 0)
+
+[node name="LegRPivot" type="Node3D" parent="Visual/BodyRoot"]
+position = Vector3(0.2, -0.25, 0.02)
+
+[node name="Thigh" type="MeshInstance3D" parent="Visual/BodyRoot/LegRPivot"]
+mesh = SubResource("ThighMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.23, 0)
+
+[node name="ShinPivot" type="Node3D" parent="Visual/BodyRoot/LegRPivot"]
+position = Vector3(0, -0.46, 0)
+
+[node name="Shin" type="MeshInstance3D" parent="Visual/BodyRoot/LegRPivot/ShinPivot"]
+mesh = SubResource("ShinMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.23, 0)
+
+[node name="Boot" type="MeshInstance3D" parent="Visual/BodyRoot/LegRPivot/ShinPivot"]
+mesh = SubResource("BootMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0, -0.46, -0.08)
+
+[node name="ShinArmor" type="MeshInstance3D" parent="Visual/BodyRoot/LegRPivot/ShinPivot"]
+scale = Vector3(0.78, 0.74, 0.32)
+mesh = SubResource("ShinMesh")
+material_override = SubResource("GunMat")
+position = Vector3(0, -0.23, -0.12)
+
+[node name="AnkleJoint" type="MeshInstance3D" parent="Visual/BodyRoot/LegRPivot/ShinPivot"]
+scale = Vector3(0.28, 0.22, 0.28)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("GunMat")
+position = Vector3(0, -0.44, 0)
+
+[node name="ChestStrip" type="MeshInstance3D" parent="Visual/BodyRoot"]
+scale = Vector3(0.62, 0.07, 0.08)
+mesh = SubResource("TorsoMesh")
+material_override = SubResource("GlowMat")
+position = Vector3(0, 0.22, -0.19)
+
+[node name="ShoulderL" type="MeshInstance3D" parent="Visual/BodyRoot"]
+scale = Vector3(0.68, 0.54, 1.08)
+mesh = SubResource("PelvisMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(-0.39, 0.40, 0.02)
+
+[node name="ShoulderR" type="MeshInstance3D" parent="Visual/BodyRoot"]
+scale = Vector3(0.68, 0.54, 1.08)
+mesh = SubResource("PelvisMesh")
+material_override = SubResource("PlayerMat")
+position = Vector3(0.39, 0.40, 0.02)
+
+[node name="BackLight" type="MeshInstance3D" parent="Visual/BodyRoot"]
+mesh = SubResource("PackMesh")
+material_override = SubResource("GlowMat")
+scale = Vector3(0.23, 0.80, 0.15)
+position = Vector3(0, 0.18, 0.375)
+
+[node name="NeckJoint" type="MeshInstance3D" parent="Visual/BodyRoot"]
+scale = Vector3(0.38, 0.24, 0.38)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("GunMat")
+position = Vector3(0, 0.54, 0)
+
+[node name="WaistJoint" type="MeshInstance3D" parent="Visual/BodyRoot"]
+position = Vector3(0, -0.24, 0.01)
+scale = Vector3(0.58, 0.22, 0.72)
+mesh = SubResource("PelvisMesh")
+material_override = SubResource("GunMat")
+
+[node name="RibPlateL" type="MeshInstance3D" parent="Visual/BodyRoot"]
+rotation_degrees = Vector3(0, 0, -8)
+scale = Vector3(0.28, 0.62, 0.10)
+mesh = SubResource("TorsoMesh")
+material_override = SubResource("GunMat")
+position = Vector3(-0.24, 0.12, -0.20)
+
+[node name="RibPlateR" type="MeshInstance3D" parent="Visual/BodyRoot"]
+rotation_degrees = Vector3(0, 0, 8)
+scale = Vector3(0.28, 0.62, 0.10)
+mesh = SubResource("TorsoMesh")
+material_override = SubResource("GunMat")
+position = Vector3(0.24, 0.12, -0.20)
+
+[node name="WeaponPivot" type="Node3D" parent="Visual"]
+rotation = Vector3(-0.08, 0, -0.05)
+position = Vector3(0.30, 0.28, -0.16)
+
+[node name="Gun" type="MeshInstance3D" parent="Visual/WeaponPivot"]
+position = Vector3(0, 0, -0.46)
+mesh = SubResource("GunMesh")
+material_override = SubResource("GunMat")
+
+[node name="BarrelGlow" type="MeshInstance3D" parent="Visual/WeaponPivot"]
+position = Vector3(0, -0.12, -0.58)
+scale = Vector3(0.34, 0.28, 0.74)
+mesh = SubResource("GunMesh")
+material_override = SubResource("GlowMat")
+
+[node name="Stock" type="MeshInstance3D" parent="Visual/WeaponPivot"]
+position = Vector3(0, -0.08, 0.08)
+scale = Vector3(1.45, 1.22, 0.32)
+mesh = SubResource("GunMesh")
+material_override = SubResource("GunMat")
+
+[node name="Muzzle" type="Marker3D" parent="Visual/WeaponPivot"]
+position = Vector3(0, 0, -1.05)
+
+[node name="MuzzleFlash" type="MeshInstance3D" parent="Visual/WeaponPivot"]
+position = Vector3(0, 0, -1.07)
+mesh = SubResource("FlashMesh")
+material_override = SubResource("FlashMat")
+
+[node name="MuzzleLight" type="OmniLight3D" parent="Visual/WeaponPivot"]
+position = Vector3(0, 0, -1.0)
+light_color = Color(1, 0.22, 0.03, 1)
+light_energy = 0.0
+omni_range = 5.0
+shadow_enabled = false
+
+[node name="CameraPivot" type="Node3D" parent="."]
+rotation = Vector3(-0.18, 0, 0)
+position = Vector3(0, 1.78, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+position = Vector3(0.48, 0.08, 0)
+spring_length = 5.7
+margin = 0.2
+collision_mask = 1
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+current = true
+fov = 74.0
+position = Vector3(0, 0, 0)
+
+[node name="ForwardLight" type="SpotLight3D" parent="CameraPivot/SpringArm3D/Camera3D"]
+light_color = Color(0.62, 0.74, 1.0, 1)
+light_energy = 2.20
+shadow_enabled = false
+spot_range = 26.0
+spot_angle = 43.0
+spot_attenuation = 1.35
+
+[node name="RightGrip" type="Marker3D" parent="Visual/WeaponPivot"]
+position = Vector3(0, -0.13, -0.02)
+
+[node name="LeftGrip" type="Marker3D" parent="Visual/WeaponPivot"]
+position = Vector3(-0.24, -0.10, -0.30)

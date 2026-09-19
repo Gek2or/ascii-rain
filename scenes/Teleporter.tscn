@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/teleporter.gd" id="1_teleporter"]
+
+[sub_resource type="CylinderMesh" id="BaseMesh"]
+top_radius = 2.4
+bottom_radius = 2.7
+height = 0.5
+
+[sub_resource type="CylinderShape3D" id="BaseShape"]
+radius = 2.5
+height = 0.5
+
+[sub_resource type="TorusMesh" id="RingMeshA"]
+inner_radius = 2.0
+outer_radius = 2.18
+rings = 32
+ring_segments = 10
+
+[sub_resource type="TorusMesh" id="RingMeshB"]
+inner_radius = 1.35
+outer_radius = 1.47
+rings = 28
+ring_segments = 8
+
+[sub_resource type="CylinderMesh" id="PillarMesh"]
+top_radius = 0.26
+bottom_radius = 0.34
+height = 2.8
+
+[sub_resource type="StandardMaterial3D" id="DarkMat"]
+albedo_color = Color(0.028, 0.035, 0.05, 1)
+metallic = 0.7
+roughness = 0.32
+
+[sub_resource type="StandardMaterial3D" id="GlowMat"]
+shading_mode = 0
+albedo_color = Color(0.28, 0.76, 1, 1)
+emission_enabled = true
+emission = Color(0.08, 0.52, 1, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="TorusMesh" id="FieldRingMesh"]
+inner_radius = 11.25
+outer_radius = 11.42
+rings = 64
+ring_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="FieldMat"]
+shading_mode = 0
+albedo_color = Color(0.08, 0.35, 0.8, 1)
+emission_enabled = true
+emission = Color(0.04, 0.22, 0.8, 1)
+emission_energy_multiplier = 1.9
+
+[sub_resource type="CylinderMesh" id="BeamMesh"]
+top_radius = 0.035
+bottom_radius = 0.035
+height = 13.0
+
+[sub_resource type="SphereMesh" id="BeaconMesh"]
+radius = 0.18
+height = 0.36
+
+[sub_resource type="StandardMaterial3D" id="BeaconMat"]
+shading_mode = 0
+albedo_color = Color(1, 0.72, 0.25, 1)
+emission_enabled = true
+emission = Color(1, 0.42, 0.06, 1)
+emission_energy_multiplier = 6.0
+
+[node name="Teleporter" type="Node3D"]
+script = ExtResource("1_teleporter")
+
+[node name="BaseBody" type="StaticBody3D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseBody"]
+position = Vector3(0, 0.25, 0)
+shape = SubResource("BaseShape")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.25, 0)
+mesh = SubResource("BaseMesh")
+material_override = SubResource("DarkMat")
+
+[node name="Pillar" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.65, 0)
+mesh = SubResource("PillarMesh")
+material_override = SubResource("DarkMat")
+
+[node name="RingA" type="Node3D" parent="."]
+position = Vector3(0, 0.64, 0)
+rotation_degrees = Vector3(90, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="RingA"]
+mesh = SubResource("RingMeshA")
+material_override = SubResource("GlowMat")
+
+[node name="RingB" type="Node3D" parent="."]
+position = Vector3(0, 1.0, 0)
+rotation_degrees = Vector3(90, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="RingB"]
+mesh = SubResource("RingMeshB")
+material_override = SubResource("GlowMat")
+
+[node name="FieldRing" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.035, 0)
+rotation_degrees = Vector3(90, 0, 0)
+mesh = SubResource("FieldRingMesh")
+material_override = SubResource("FieldMat")
+
+[node name="SignalBeam" type="MeshInstance3D" parent="."]
+position = Vector3(0, 7.0, 0)
+mesh = SubResource("BeamMesh")
+material_override = SubResource("GlowMat")
+
+[node name="Beacon" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3.16, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("BeaconMat")
+
+[node name="BeaconLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 3.15, 0)
+light_color = Color(0.2, 0.62, 1, 1)
+light_energy = 2.6
+omni_range = 13.0
+shadow_enabled = false

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"rapid_array"
+display_name = "RAPID ARRAY"
+description = "Raises base fire rate by 10% per stack."
+rarity = 0
+max_stack = 99
+effect_tag = &"fire_rate"

@@ -1,0 +1,129 @@
+{
+  "engine_version": "4.8.dev.mono.gh.3756fbb2c",
+  "binary_sha256": "9ce3b96544a9b5c5883c053ed6b748eb327da039e9523d7350174d44de24bdea",
+  "execution": "Actual Linux Godot debug export template; temporary native PNG/WAV remaps and class cache. NOT regular Editor import.",
+  "graphics": "Compatibility OpenGL 4.5 / Mesa 25.0.7-2 llvmpipe LLVM 19.1.7 / Xvfb",
+  "aggregation": "Final individual logs from three invocations (core, render, settings), not a new execution. native_provenance.json contains only the last invocation.",
+  "final_cases": [
+    {
+      "case": "district_depths",
+      "status": "PASS",
+      "assertions": 67,
+      "log": "build/native_district_depths.log",
+      "sha256": "39e155b4b844f0b4413b281020148d6dafcdb0c96f1d68294de0029b4b62f3e6",
+      "warnings": []
+    },
+    {
+      "case": "district_events",
+      "status": "PASS",
+      "assertions": 98,
+      "log": "build/native_district_events.log",
+      "sha256": "4748e318dadf52979c47fcb9faaa5e31de92882eebf766cb159171a980e03bb3",
+      "warnings": []
+    },
+    {
+      "case": "settings_v013",
+      "status": "PASS",
+      "assertions": 21,
+      "log": "build/native_settings_v013.log",
+      "sha256": "9e4eb842d1aa4447df2a7a92f1e039b31a21e00d32b32cd18d4222aa610d6cdd",
+      "warnings": []
+    },
+    {
+      "case": "civic_city",
+      "status": "PASS",
+      "assertions": 76,
+      "log": "build/native_civic_city.log",
+      "sha256": "0440b5232cea8de258b585242ef19483fc6e224c58224d5ac311cd36059b2214",
+      "warnings": []
+    },
+    {
+      "case": "living_city",
+      "status": "PASS",
+      "assertions": 70,
+      "log": "build/native_living_city.log",
+      "sha256": "ef212521ef27beac9f45876e6b8ac372f77342ef583792d610d01b1f218120e1",
+      "warnings": []
+    },
+    {
+      "case": "tactics",
+      "status": "PASS",
+      "assertions": 38,
+      "log": "build/native_tactics.log",
+      "sha256": "a16aa63ba407b5ed53c88fd4ad8fc8d918e2de2e43afd6cb449158dc27db7c95",
+      "warnings": []
+    },
+    {
+      "case": "city_navigation",
+      "status": "PASS",
+      "assertions": 16,
+      "log": "build/native_city_navigation.log",
+      "sha256": "7b2ecd6273f3324c202772f025f883ee81248a29ddb456c1637d055fcf463c54",
+      "warnings": []
+    },
+    {
+      "case": "run_state",
+      "status": "PASS",
+      "assertions": 73,
+      "log": "build/native_run_state.log",
+      "sha256": "32b55b74737d35436ab9f2477a23574a084a99bd12c3c69041155a514b44edde",
+      "warnings": []
+    },
+    {
+      "case": "run_loop",
+      "status": "PASS",
+      "assertions": 42,
+      "log": "build/native_run_loop.log",
+      "sha256": "cbca2325e647ed3733bce67a87790f4399007139d55b8ff5b7abbbf10b5c6f4e",
+      "warnings": []
+    },
+    {
+      "case": "reference_glyph",
+      "status": "PASS",
+      "assertions": 133,
+      "log": "build/native_reference_glyph.log",
+      "sha256": "744ed8ca5694e84b1910b47a0cbda59d424b4886aceb02fb9cc3e4ed3edc2a38",
+      "warnings": [
+        "WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver."
+      ]
+    },
+    {
+      "case": "general_smoke",
+      "status": "PASS",
+      "assertions": null,
+      "log": "build/native_general_smoke.log",
+      "sha256": "dbf04ac26c1d3f7900bbbe887b47a7383771379d4b41f59c9eb4c0563f14d038",
+      "warnings": [
+        "WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+      ]
+    },
+    {
+      "case": "touch_smoke",
+      "status": "PASS",
+      "assertions": null,
+      "log": "build/native_touch_smoke.log",
+      "sha256": "bcd687bc643717bcb8ce8ba9ce6175ad9047a7ccbb3cd45aa3b15cf990abcaef",
+      "warnings": []
+    },
+    {
+      "case": "render_capture",
+      "status": "PASS",
+      "assertions": null,
+      "log": "build/native_render_capture.log",
+      "sha256": "3bdc9eb11b7156f8091f36fc026240f340e2acc71ca4d4cea544d69ea0e8d890",
+      "warnings": [
+        "WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver."
+      ]
+    },
+    {
+      "case": "reference_city_capture",
+      "status": "PASS",
+      "assertions": null,
+      "log": "build/native_reference_city_capture.log",
+      "sha256": "682202042dfb36f5329162560498ff652afe676cfbdadc8a184383d94ad4b822",
+      "warnings": [
+        "WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,413 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/city_generator.gd" id="3_city"]
+[ext_resource type="Shader" path="res://shaders/ascii_post.gdshader" id="4_shader"]
+[ext_resource type="Texture2D" path="res://assets/ascii_atlas.png" id="5_atlas"]
+[ext_resource type="Script" path="res://scripts/story_director.gd" id="6_story"]
+[ext_resource type="Script" path="res://scripts/mobile_controls.gd" id="7_mobile"]
+
+
+[sub_resource type="Environment" id="Environment"]
+background_mode = 1
+background_color = Color(0.009, 0.014, 0.032, 1)
+background_energy_multiplier = 1.08
+ambient_light_source = 2
+ambient_light_sky_contribution = 0.0
+ambient_light_color = Color(0.48, 0.52, 0.62, 1)
+ambient_light_energy = 0.95
+tonemap_mode = 2
+fog_enabled = true
+fog_sky_affect = 0.08
+fog_light_color = Color(0.12, 0.16, 0.24, 1)
+fog_light_energy = 1.10
+fog_density = 0.0018
+
+[sub_resource type="ShaderMaterial" id="ASCII_Material"]
+shader = ExtResource("4_shader")
+shader_parameter/glyph_atlas = ExtResource("5_atlas")
+shader_parameter/cell_px = 6.0
+shader_parameter/glyph_gain = 1.72
+shader_parameter/edge_gain = 0.82
+shader_parameter/bloom_strength = 0.40
+
+[sub_resource type="StyleBoxFlat" id="BarBG"]
+bg_color = Color(0.025, 0.03, 0.045, 0.88)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="HealthFill"]
+bg_color = Color(0.95, 0.08, 0.06, 0.95)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="XPFill"]
+bg_color = Color(0.32, 0.6, 0.95, 0.9)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="PanelStyle"]
+bg_color = Color(0.01, 0.012, 0.02, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.5, 0.62, 0.45)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_game")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment")
+
+[node name="MoonLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, -34, 0)
+light_color = Color(0.76, 0.80, 0.90, 1)
+light_energy = 1.12
+shadow_enabled = true
+
+[node name="City" type="Node3D" parent="."]
+script = ExtResource("3_city")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector3(0, 0.1, 10)
+
+[node name="StoryDirector" type="Node" parent="."]
+script = ExtResource("6_story")
+
+[node name="MobileControls" type="CanvasLayer" parent="."]
+script = ExtResource("7_mobile")
+
+[node name="PostFX" type="CanvasLayer" parent="."]
+layer = 90
+
+[node name="ASCII" type="ColorRect" parent="PostFX"]
+material = SubResource("ASCII_Material")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Crosshair" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -15.0
+offset_right = 9.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0.95, 0.95, 1, 0.85)
+theme_override_font_sizes/font_size = 20
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="HUD"]
+offset_left = 28.0
+offset_top = 626.0
+offset_right = 310.0
+offset_bottom = 644.0
+theme_override_styles/background = SubResource("BarBG")
+theme_override_styles/fill = SubResource("HealthFill")
+show_percentage = false
+value = 100.0
+
+[node name="HealthText" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 647.0
+offset_right = 180.0
+offset_bottom = 675.0
+theme_override_colors/font_color = Color(0.95, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "200 / 200"
+
+[node name="Level" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 680.0
+offset_right = 110.0
+offset_bottom = 710.0
+theme_override_colors/font_color = Color(0.9, 0.93, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "LV.01"
+
+[node name="XPBar" type="ProgressBar" parent="HUD"]
+offset_left = 102.0
+offset_top = 687.0
+offset_right = 310.0
+offset_bottom = 700.0
+theme_override_styles/background = SubResource("BarBG")
+theme_override_styles/fill = SubResource("XPFill")
+show_percentage = false
+value = 0.0
+
+[node name="Weapon" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 558.0
+offset_right = 410.0
+offset_bottom = 586.0
+theme_override_colors/font_color = Color(0.62, 0.82, 1, 0.95)
+theme_override_font_sizes/font_size = 15
+text = "WPN  PULSE RIFLE // 28 DMG // 7.0 RPS"
+
+[node name="Credits" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 594.0
+offset_right = 270.0
+offset_bottom = 620.0
+theme_override_colors/font_color = Color(1, 0.78, 0.36, 0.95)
+theme_override_font_sizes/font_size = 15
+text = "CREDITS  0000¢"
+
+[node name="ItemsPanel" type="Panel" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 430.0
+offset_right = -24.0
+offset_bottom = 690.0
+theme_override_styles/panel = SubResource("PanelStyle")
+
+[node name="Header" type="Label" parent="HUD/ItemsPanel"]
+offset_left = 14.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.78, 0.84, 0.95, 0.9)
+theme_override_font_sizes/font_size = 13
+text = "RELIC STACK"
+
+[node name="Items" type="Label" parent="HUD/ItemsPanel"]
+offset_left = 14.0
+offset_top = 38.0
+offset_right = 212.0
+offset_bottom = 246.0
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 0.9)
+theme_override_font_sizes/font_size = 12
+text = "NO RELICS"
+
+[node name="Timer" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 22.0
+offset_right = -24.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.96, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "00:00"
+horizontal_alignment = 2
+
+[node name="Difficulty" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -290.0
+offset_top = 56.0
+offset_right = -24.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(0.75, 0.8, 0.9, 0.9)
+theme_override_font_sizes/font_size = 14
+text = "THREAT 1.00×   KILLS 0"
+horizontal_alignment = 2
+
+[node name="Title" type="Label" parent="HUD"]
+offset_left = 26.0
+offset_top = 22.0
+offset_right = 310.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.88, 0.91, 1, 0.95)
+theme_override_font_sizes/font_size = 20
+text = "ASCII//RAIN   DISTRICT 01 // THE INDEX"
+
+[node name="Controls" type="Label" parent="HUD"]
+offset_left = 26.0
+offset_top = 56.0
+offset_right = 470.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(0.6, 0.66, 0.76, 0.75)
+theme_override_font_sizes/font_size = 13
+text = "WASD MOVE   SPACE JUMP   SHIFT DASH   LMB FIRE   Q / 1-3 WEAPON   E USE   F1 ASCII"
+
+[node name="Objective" type="Label" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 90.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0.78, 0.87, 1, 0.92)
+theme_override_font_sizes/font_size = 14
+text = "OBJECTIVE"
+horizontal_alignment = 1
+
+[node name="TeleporterBar" type="ProgressBar" parent="HUD"]
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -170.0
+offset_top = 122.0
+offset_right = 170.0
+offset_bottom = 135.0
+theme_override_styles/background = SubResource("BarBG")
+theme_override_styles/fill = SubResource("XPFill")
+show_percentage = false
+value = 0.0
+
+[node name="TeleporterText" type="Label" parent="HUD"]
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -170.0
+offset_top = 139.0
+offset_right = 170.0
+offset_bottom = 161.0
+theme_override_colors/font_color = Color(0.46, 0.72, 1, 0.9)
+theme_override_font_sizes/font_size = 12
+text = "TELEPORTER 0%"
+horizontal_alignment = 1
+
+[node name="BossPanel" type="Control" parent="HUD"]
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -235.0
+offset_top = 174.0
+offset_right = 235.0
+offset_bottom = 218.0
+
+[node name="BossText" type="Label" parent="HUD/BossPanel"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color(1, 0.72, 0.62, 1)
+theme_override_font_sizes/font_size = 13
+text = "WATCHER"
+horizontal_alignment = 1
+
+[node name="BossBar" type="ProgressBar" parent="HUD/BossPanel"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 25.0
+offset_bottom = 39.0
+theme_override_styles/background = SubResource("BarBG")
+theme_override_styles/fill = SubResource("HealthFill")
+show_percentage = false
+value = 100.0
+
+[node name="Interaction" type="Label" parent="HUD"]
+anchors_preset = 12
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -72.0
+offset_right = 280.0
+offset_bottom = -40.0
+theme_override_colors/font_color = Color(1, 0.85, 0.48, 1)
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+
+[node name="Upgrade" type="Label" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 228.0
+offset_bottom = 268.0
+theme_override_colors/font_color = Color(1, 0.8, 0.42, 1)
+theme_override_font_sizes/font_size = 22
+text = ""
+horizontal_alignment = 1
+
+[node name="DeathPanel" type="Panel" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -110.0
+offset_right = 230.0
+offset_bottom = 110.0
+theme_override_styles/panel = SubResource("PanelStyle")
+
+[node name="Summary" type="Label" parent="HUD/DeathPanel"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 28.0
+offset_bottom = 103.0
+theme_override_colors/font_color = Color(0.96, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "RUN TERMINATED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="HUD/DeathPanel"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -74.0
+offset_right = 85.0
+offset_bottom = -28.0
+text = "RESTART RUN"
+
+
+[node name="CompletePanel" type="Panel" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -125.0
+offset_right = 250.0
+offset_bottom = 125.0
+theme_override_styles/panel = SubResource("PanelStyle")
+
+[node name="Summary" type="Label" parent="HUD/CompletePanel"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 25.0
+offset_bottom = 135.0
+theme_override_colors/font_color = Color(0.86, 0.94, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "DISTRICT CLEARED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="HUD/CompletePanel"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -70.0
+offset_right = 90.0
+offset_bottom = -26.0
+text = "NEW RUN"
+
+[connection signal="pressed" from="HUD/DeathPanel/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="HUD/CompletePanel/Restart" to="." method="_on_restart_pressed"]

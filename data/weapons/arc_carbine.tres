@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/weapon_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"arc_carbine"
+display_name = "ARC CARBINE"
+damage_multiplier = 1.58
+fire_rate_multiplier = 0.58
+pellets = 1
+spread_degrees = 1.0
+tracer_color = Color(0.30, 0.78, 1.0, 1)
+stagger_power = 0.72
+shot_recoil = 1.25
+muzzle_flash_duration = 0.085
+muzzle_light_energy = 8.6
+intrinsic_chain_jumps = 2
+intrinsic_chain_damage_ratio = 0.30
+hud_suffix = "ARC x2"

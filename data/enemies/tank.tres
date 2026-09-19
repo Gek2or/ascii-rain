@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/enemy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"tank"
+display_name = "TANK"
+move_speed = 1.72
+max_health = 165.0
+touch_damage = 18.0
+attack_interval = 1.9
+projectile_damage = 15.0
+projectile_speed = 11.0
+preferred_range = 9.0
+xp_reward = 32
+credit_reward = 12
+scale_multiplier = 1.48
+core_color = Color(0.95, 0.03, 0.03, 1)
+visual_profile = 4
+accent_color = Color(0.25, 0.09, 0.10, 1)
+stride_scale = 0.38
+bob_amount = 0.03
+attack_pose_scale = 0.85

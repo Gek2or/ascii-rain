@@ -1,0 +1,90 @@
+shader_type canvas_item;
+render_mode unshaded;
+
+// v0.10.1: tone hierarchy first. Shadows must not become a full alphabet.
+// The color bed is ONE sampled color per ASCII cell, not a raw 3D overlay.
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear;
+uniform sampler2D glyph_atlas : repeat_disable, filter_nearest;
+uniform float cell_px : hint_range(4.0, 10.0, 1.0) = 6.0;
+uniform float exposure : hint_range(0.75, 1.75) = 1.0;
+uniform float glyph_gain : hint_range(0.5, 2.5) = 1.40;
+uniform float edge_gain : hint_range(0.0, 2.0) = 0.45;
+uniform float bloom_strength : hint_range(0.0, 0.7) = 0.16;
+uniform float readability : hint_range(0.0, 1.0) = 0.65;
+uniform float background_calm : hint_range(0.0, 1.0) = 0.40;
+uniform float color_saturation : hint_range(0.35, 1.0) = 0.68;
+uniform float surface_fill : hint_range(0.15, 0.70) = 0.50;
+const float GLYPH_COUNT = 32.0;
+
+float luma(vec3 value) {
+    return dot(value, vec3(0.2126, 0.7152, 0.0722));
+}
+
+// Ordered punctuation by stroke coverage: blank . : - + = * # @ .
+// No Y/L/T/K random substitutions across thousands of flat background cells.
+float palette(float rank) {
+    if (rank < 1.0) { return 0.0; }
+    if (rank < 2.0) { return 1.0; }
+    if (rank < 3.0) { return 2.0; }
+    if (rank < 4.0) { return 5.0; }
+    if (rank < 5.0) { return 11.0; }
+    if (rank < 6.0) { return 13.0; }
+    if (rank < 7.0) { return 22.0; }
+    if (rank < 8.0) { return 30.0; }
+    return 31.0;
+}
+
+float glyph_mask(float index, vec2 local_uv) {
+    return texture(glyph_atlas, vec2((index + local_uv.x) / GLYPH_COUNT, local_uv.y)).r;
+}
+
+void fragment() {
+    vec2 cell = vec2(floor(cell_px + 0.5), floor(cell_px * 1.5 + 0.5));
+    vec2 grid = SCREEN_UV / (SCREEN_PIXEL_SIZE * cell);
+    vec2 cell_id = floor(grid);
+    vec2 local_uv = (floor(fract(grid) * cell) + 0.5) / cell;
+    vec2 center = (cell_id + 0.5) * SCREEN_PIXEL_SIZE * cell;
+    vec2 dx = vec2(SCREEN_PIXEL_SIZE.x * cell.x * 0.30, 0.0);
+    vec2 dy = vec2(0.0, SCREEN_PIXEL_SIZE.y * cell.y * 0.30);
+    vec3 central = texture(screen_texture, center).rgb;
+    vec3 left = texture(screen_texture, center - dx).rgb;
+    vec3 right = texture(screen_texture, center + dx).rgb;
+    vec3 up = texture(screen_texture, center - dy).rgb;
+    vec3 down = texture(screen_texture, center + dy).rgb;
+    vec3 average = (central * 4.0 + left + right + up + down) / 8.0;
+    vec3 peak = max(central, max(max(left, right), max(up, down)));
+    vec3 src = clamp(mix(average, peak, 0.10) * exposure, vec3(0.0), vec3(1.0));
+    float raw_luma = luma(src);
+    float contrast = abs(luma(right) - luma(left)) + abs(luma(down) - luma(up));
+    float local_shape = smoothstep(0.035, 0.24, contrast);
+    float highlight = smoothstep(0.55, 0.90, max(src.r, max(src.g, src.b)));
+    float importance = max(local_shape, highlight);
+
+    float tone = mix(raw_luma, pow(raw_luma, 0.90), readability * 0.70);
+    tone += local_shape * edge_gain * 0.015;
+    tone *= smoothstep(0.0, 0.012, raw_luma);
+    tone = clamp(tone, 0.0, 0.96);
+    float rank = clamp(tone * 8.0 + local_shape * edge_gain * 0.60, 0.0, 8.0);
+    float low = floor(rank);
+    // Crossfade adjacent coverage levels: continuous response to tiny light changes.
+    float weight = smoothstep(0.0, 1.0, fract(rank));
+    float glyph = mix(glyph_mask(palette(low), local_uv),
+        glyph_mask(palette(min(low + 1.0, 8.0)), local_uv), weight);
+
+    vec3 normalized_hue = clamp(src / max(raw_luma, 0.001), vec3(0.0), vec3(3.0));
+    float saturation = color_saturation * mix(0.55, 1.0, smoothstep(0.03, 0.40, raw_luma));
+    vec3 hue = mix(vec3(1.0), normalized_hue, saturation);
+    hue /= max(luma(hue), 0.001);
+    vec3 target = clamp(hue * tone, vec3(0.0), vec3(0.96));
+
+    // Bound stroke contrast. Never divide low-tone energy by a tiny mask area:
+    // that was turning dim flat walls into bright typing-paper in v0.10.
+    float bed_ratio = mix(0.44, 0.76, (surface_fill - 0.15) / 0.55);
+    float calm = background_calm * (1.0 - importance);
+    float amplitude = (0.70 + 0.38 * glyph_gain) * mix(1.0, 0.32, calm);
+    vec3 background = target * bed_ratio;
+    vec3 ink = min(target * (bed_ratio + amplitude), vec3(0.96));
+    vec3 result = mix(background, ink, glyph);
+    result += max(average - vec3(0.82), vec3(0.0)) * bloom_strength * 0.10;
+    COLOR = vec4(clamp(result, vec3(0.0), vec3(1.0)), 1.0);
+}

@@ -1,0 +1,279 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_enemy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape"]
+radius = 0.55
+height = 2.2
+
+[sub_resource type="BoxMesh" id="BodyMesh"]
+size = Vector3(1.05, 1.08, 0.68)
+
+[sub_resource type="BoxMesh" id="HeadMesh"]
+size = Vector3(0.7, 0.48, 0.58)
+
+[sub_resource type="SphereMesh" id="CoreMesh"]
+radius = 0.16
+height = 0.32
+
+[sub_resource type="StandardMaterial3D" id="RobotMat"]
+albedo_color = Color(0.08, 0.09, 0.12, 1)
+metallic = 0.65
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="CoreMat"]
+shading_mode = 0
+albedo_color = Color(1, 0.05, 0.02, 1)
+emission_enabled = true
+emission = Color(1, 0.01, 0, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="BoxMesh" id="ArmMesh"]
+size = Vector3(0.24, 0.82, 0.24)
+
+[sub_resource type="BoxMesh" id="LegMesh"]
+size = Vector3(0.28, 0.72, 0.30)
+
+[sub_resource type="BoxMesh" id="FootMesh"]
+size = Vector3(0.34, 0.20, 0.45)
+
+[sub_resource type="BoxMesh" id="ShoulderMesh"]
+size = Vector3(0.48, 0.30, 0.70)
+
+[sub_resource type="BoxMesh" id="PlateMesh"]
+size = Vector3(0.78, 0.52, 0.12)
+
+[sub_resource type="BoxMesh" id="WeaponMesh"]
+size = Vector3(0.18, 0.20, 0.86)
+
+[sub_resource type="BoxMesh" id="BackMesh"]
+size = Vector3(0.56, 0.62, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="DetailMat"]
+albedo_color = Color(0.15, 0.18, 0.24, 1)
+metallic = 0.78
+roughness = 0.28
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_enemy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1.1, 0)
+shape = SubResource("CapsuleShape")
+
+[node name="Visual" type="Node3D" parent="."]
+position = Vector3(0, 1.15, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.12, 0)
+mesh = SubResource("BodyMesh")
+material_override = SubResource("RobotMat")
+
+[node name="Head" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.86, 0)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("RobotMat")
+
+[node name="Core" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.18, -0.36)
+mesh = SubResource("CoreMesh")
+material_override = SubResource("CoreMat")
+
+
+[node name="Jaw" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.66, -0.08)
+scale = Vector3(0.76, 0.24, 0.72)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("DetailMat")
+
+[node name="Waist" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, -0.43, 0.02)
+scale = Vector3(0.72, 0.34, 0.72)
+mesh = SubResource("BodyMesh")
+material_override = SubResource("DetailMat")
+
+[node name="HipL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.40, -0.40, 0.0)
+rotation_degrees = Vector3(0, 0, -10)
+scale = Vector3(0.46, 0.34, 0.78)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("DetailMat")
+
+[node name="HipR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.40, -0.40, 0.0)
+rotation_degrees = Vector3(0, 0, 10)
+scale = Vector3(0.46, 0.34, 0.78)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("DetailMat")
+
+[node name="ArmL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.68, 0.02, 0)
+rotation = Vector3(0, 0, -0.22)
+mesh = SubResource("ArmMesh")
+material_override = SubResource("RobotMat")
+
+
+[node name="Elbow" type="MeshInstance3D" parent="Visual/ArmL"]
+position = Vector3(0, -0.34, -0.04)
+scale = Vector3(0.72, 0.42, 0.72)
+mesh = SubResource("CoreMesh")
+material_override = SubResource("DetailMat")
+
+[node name="Hand" type="MeshInstance3D" parent="Visual/ArmL"]
+position = Vector3(0, -0.48, -0.04)
+scale = Vector3(0.78, 0.78, 0.78)
+mesh = SubResource("CoreMesh")
+material_override = SubResource("RobotMat")
+
+[node name="ArmR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.68, 0.02, 0)
+rotation = Vector3(0, 0, 0.22)
+mesh = SubResource("ArmMesh")
+material_override = SubResource("RobotMat")
+
+
+[node name="Elbow" type="MeshInstance3D" parent="Visual/ArmR"]
+position = Vector3(0, -0.34, -0.04)
+scale = Vector3(0.72, 0.42, 0.72)
+mesh = SubResource("CoreMesh")
+material_override = SubResource("DetailMat")
+
+[node name="Hand" type="MeshInstance3D" parent="Visual/ArmR"]
+position = Vector3(0, -0.48, -0.04)
+scale = Vector3(0.78, 0.78, 0.78)
+mesh = SubResource("CoreMesh")
+material_override = SubResource("RobotMat")
+
+[node name="ChestPlate" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.18, -0.39)
+mesh = SubResource("PlateMesh")
+material_override = SubResource("DetailMat")
+
+[node name="ShoulderL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.61, 0.38, 0.02)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("DetailMat")
+
+[node name="ShoulderR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.61, 0.38, 0.02)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("DetailMat")
+
+[node name="Weapon" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.68, -0.05, -0.42)
+rotation = Vector3(-0.08, 0, 0)
+mesh = SubResource("WeaponMesh")
+material_override = SubResource("DetailMat")
+
+[node name="BackUnit" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.16, 0.46)
+mesh = SubResource("BackMesh")
+material_override = SubResource("DetailMat")
+
+
+[node name="BackVentL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.22, 0.20, 0.61)
+rotation_degrees = Vector3(0, 0, -6)
+scale = Vector3(0.22, 0.72, 0.34)
+mesh = SubResource("BackMesh")
+material_override = SubResource("CoreMat")
+
+[node name="BackVentR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.22, 0.20, 0.61)
+rotation_degrees = Vector3(0, 0, 6)
+scale = Vector3(0.22, 0.72, 0.34)
+mesh = SubResource("BackMesh")
+material_override = SubResource("CoreMat")
+
+[node name="SpinePlate" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, -0.12, 0.52)
+scale = Vector3(0.34, 0.72, 0.48)
+mesh = SubResource("PlateMesh")
+material_override = SubResource("DetailMat")
+
+[node name="EyeL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.16, 0.89, -0.30)
+scale = Vector3(0.22, 0.10, 0.10)
+mesh = SubResource("CoreMesh")
+material_override = SubResource("CoreMat")
+
+[node name="EyeR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.16, 0.89, -0.30)
+scale = Vector3(0.22, 0.10, 0.10)
+mesh = SubResource("CoreMesh")
+material_override = SubResource("CoreMat")
+
+[node name="AntennaL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.18, 1.22, 0.08)
+rotation_degrees = Vector3(0, 0, -12)
+scale = Vector3(0.22, 0.58, 0.22)
+mesh = SubResource("ArmMesh")
+material_override = SubResource("DetailMat")
+
+[node name="AntennaR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.18, 1.22, 0.08)
+rotation_degrees = Vector3(0, 0, 12)
+scale = Vector3(0.22, 0.58, 0.22)
+mesh = SubResource("ArmMesh")
+material_override = SubResource("DetailMat")
+
+[node name="SidePanelL" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.55, 0.08, 0.0)
+rotation_degrees = Vector3(0, 0, 8)
+scale = Vector3(0.24, 0.90, 1.15)
+mesh = SubResource("PlateMesh")
+material_override = SubResource("DetailMat")
+
+[node name="SidePanelR" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.55, 0.08, 0.0)
+rotation_degrees = Vector3(0, 0, -8)
+scale = Vector3(0.24, 0.90, 1.15)
+mesh = SubResource("PlateMesh")
+material_override = SubResource("DetailMat")
+
+[node name="CoreLight" type="OmniLight3D" parent="Visual"]
+position = Vector3(0, 0.20, -0.48)
+light_color = Color(1, 0.06, 0.02, 1)
+light_energy = 1.15
+omni_range = 3.2
+shadow_enabled = false
+
+[node name="LegLPivot" type="Node3D" parent="Visual"]
+position = Vector3(-0.25, -0.58, 0.02)
+
+[node name="Leg" type="MeshInstance3D" parent="Visual/LegLPivot"]
+position = Vector3(0, -0.33, 0)
+mesh = SubResource("LegMesh")
+material_override = SubResource("RobotMat")
+
+[node name="Foot" type="MeshInstance3D" parent="Visual/LegLPivot"]
+position = Vector3(0, -0.71, -0.08)
+mesh = SubResource("FootMesh")
+material_override = SubResource("RobotMat")
+
+[node name="KneeL" type="MeshInstance3D" parent="Visual/LegLPivot"]
+position = Vector3(0, -0.46, -0.15)
+scale = Vector3(0.58, 0.45, 0.48)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("DetailMat")
+
+[node name="LegRPivot" type="Node3D" parent="Visual"]
+position = Vector3(0.25, -0.58, 0.02)
+
+[node name="Leg" type="MeshInstance3D" parent="Visual/LegRPivot"]
+position = Vector3(0, -0.33, 0)
+mesh = SubResource("LegMesh")
+material_override = SubResource("RobotMat")
+
+[node name="Foot" type="MeshInstance3D" parent="Visual/LegRPivot"]
+position = Vector3(0, -0.71, -0.08)
+mesh = SubResource("FootMesh")
+material_override = SubResource("RobotMat")
+
+[node name="KneeR" type="MeshInstance3D" parent="Visual/LegRPivot"]
+position = Vector3(0, -0.46, -0.15)
+scale = Vector3(0.58, 0.45, 0.48)
+mesh = SubResource("ShoulderMesh")
+material_override = SubResource("DetailMat")

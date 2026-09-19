@@ -1,0 +1,22 @@
+Godot Engine v4.8.dev.mono.gh.3756fbb2c (2026-09-11 16:19:17 UTC) - https://godotengine.org
+
+DEPTHS_GRAPH: 4312
+DEPTHS_FLOORS: [(-60.0, -5.92, -20.0), (-60.0, 0.08, -20.0)] -> [{ "point": (-60.0, 0.0, -20.0), "surface": &"street", "body": @StaticBody3D@6:<StaticBody3D#66588772123> }, { "point": (-60.0, -6.000001, -20.0), "surface": &"utility_lower", "body": MaintenanceLowerFloor:<StaticBody3D#177100299985> }]
+DEPTHS_OVERLAP_ROUTE: ok points=29
+DEPTHS_FLOORS: [(-29.0, 0.08, -66.0), (-29.0, 10.08, -66.0)] -> [{ "point": (-29.0, 9.999998, -66.0), "surface": &"relay_west", "body": RelayRoof:<StaticBody3D#186646536456> }, { "point": (-29.0, 0.0, -66.0), "surface": &"street", "body": Ground:<StaticBody3D#66504886038> }]
+DEPTHS_OVERLAP_ROUTE: ok points=37
+DEPTHS_ROUTE: [(-66.0, 0.08, 12.0), (-66.0, -5.92, -16.0)] ok n=12
+DEPTHS_ROUTE: [(-42.0, -5.92, -22.0), (-42.0, 0.08, -45.0)] ok n=10
+DEPTHS_ROUTE: [(-66.0, -5.92, -16.0), (-42.0, -5.92, -22.0)] ok n=10
+DEPTHS_ROUTE: [(-29.0, 0.08, -22.0), (-29.0, 10.08, -61.0)] ok n=16
+DEPTHS_ROUTE: [(25.5, 0.08, -22.0), (29.0, 10.08, -61.0)] ok n=16
+DEPTHS_ROUTE: [(-29.0, 10.08, -61.0), (29.0, 10.08, -61.0)] ok n=29
+DEPTHS_HOLE: (-66.0, 0.08, 0.0) -> { "point": (-66.0, -3.000195, 0.0), "surface": &"utility_south_ramp", "body": SouthServiceRamp:<StaticBody3D#177519730410> }
+DEPTHS_HOLE: (-42.0, 0.08, -33.0) -> { "point": (-42.0, -3.000196, -33.0), "surface": &"utility_north_ramp", "body": NorthServiceRamp:<StaticBody3D#178761244397> }
+DEPTHS_PLAYER: (-66.0, -5.999838, -13.67016) target=(-66.0, -5.9, -14.0)
+DEPTHS_PLAYER: (-42.0, 0.000872, -44.53758) target=(-42.0, 0.1, -45.0)
+DEPTHS_PLAYER: (-29.0, 10.00051, -60.64574) target=(-29.0, 10.1, -61.0)
+DEPTHS_PLAYER: (25.5, 0.000736, -22.42404) target=(25.5, 0.1, -22.0)
+DEPTHS_CHASER: (-61.27952, -5.999162, -17.3613) target=(-60.0, -5.92, -20.0)
+DEPTHS_CHASER: (-29.31107, 10.00083, -63.01731) target=(-29.0, 10.08, -66.0)
+DISTRICT_DEPTHS_NATIVE: 67 checks / 0 failures

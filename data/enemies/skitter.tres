@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/enemy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"skitter"
+display_name = "SKITTER"
+move_speed = 5.7
+max_health = 33.0
+touch_damage = 7.0
+attack_interval = 0.48
+projectile_damage = 9.0
+projectile_speed = 13.0
+preferred_range = 10.0
+xp_reward = 10
+credit_reward = 3
+scale_multiplier = 0.72
+core_color = Color(1.0, 0.15, 0.02, 1)
+visual_profile = 1
+accent_color = Color(0.08, 0.22, 0.22, 1)
+stride_scale = 0.92
+bob_amount = 0.074
+attack_pose_scale = 1.15

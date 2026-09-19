@@ -1,0 +1,20 @@
+Godot Engine v4.8.dev.mono.gh.3756fbb2c (2026-09-11 16:19:17 UTC) - https://godotengine.org
+
+CIVIC_GRAPH_POINTS: 4312
+CIVIC_FLOORS: (51.0, 0.08, -30.0) -> [5.49999856948853, 0.0]
+CIVIC_FLOORS: (-35.0, 0.08, 59.0) -> [5.49999856948853, 0.0]
+CIVIC_ROUTE [(40.0, 0.08, 6.0), (40.0, 5.58, -15.0)] ok nodes=9
+CIVIC_ROUTE [(62.0, 0.08, 6.0), (62.0, 5.58, -15.0)] ok nodes=9
+CIVIC_ROUTE [(40.0, 5.58, -30.0), (62.0, 5.58, -16.0)] ok nodes=14
+CIVIC_ROUTE [(-36.0, 0.08, 40.0), (-64.0, 2.83, 42.0)] ok nodes=12
+CIVIC_ROUTE [(-64.0, 0.08, 18.0), (-64.0, 2.83, 42.0)] ok nodes=11
+CIVIC_ROUTE [(-64.0, 2.83, 42.0), (-35.0, 5.58, 59.0)] ok nodes=16
+CIVIC_ROUTE [(-31.0, 0.08, 27.0), (-35.0, 5.58, 59.0)] ok nodes=14
+CIVIC_ROUTE [(-35.0, 5.58, 59.0), (-64.0, 0.08, 18.0)] ok nodes=26
+CIVIC_CHASER 0 final=(48.16576, 5.500786, -29.04982) target=(51.0, 5.58, -30.0)
+CIVIC_CHASER 1 final=(-34.15222, 5.500834, 56.15624) target=(-35.0, 5.58, 59.0)
+CIVIC_CHASER 0 final=(-64.34797, 2.750824, 39.04771) target=(-64.0, 2.83, 42.0)
+CIVIC_PLAYER_ASCENT (62.0, 5.50106, -14.4588)
+CIVIC_PLAYER_ASCENT (-64.0, 2.750249, 39.57163)
+CIVIC_PLAYER_ASCENT (-31.0, 5.500654, 51.46057)
+CIVIC_CITY_NATIVE: 76 checks / 0 failures

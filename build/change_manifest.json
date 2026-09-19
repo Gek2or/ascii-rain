@@ -1,0 +1,201 @@
+{
+  "base": "ASCII_RAIN_Godot_v0_12b_ARCHIVES_GARDENS.zip",
+  "base_sha256": "5e373033038aa003019fed316f53757bbba3f0213bd893c94daeb6755665e538",
+  "modified": [
+    {
+      "path": "CHANGELOG.md",
+      "before": "bd0272b99fe00f883b843a070fda8f02732318b6c3e80a5dd99328fbe91e90c1",
+      "after": "63b2ecd646badf50f053d9efaaf79c53f01595bf32da461b80de9d6d3886203c"
+    },
+    {
+      "path": "README.md",
+      "before": "86b9bf867feb815826333ff76a138320f95a2aa90ca29144d9ae2009d30398ea",
+      "after": "c68e8d4802cea1eca8c0ad0c1c65fed7b787e04e7a1d4d524f94feb2b036d358"
+    },
+    {
+      "path": "components/combat/delayed_blast.gd",
+      "before": "4722f73e43a76f46d7ae14ca24afd796ec921f10dabc90603060910f5f1bad4e",
+      "after": "d94772d4580cac9ca4d44d6cbcb29e7cb396b7abe01e4dee892544824e44a479"
+    },
+    {
+      "path": "components/combat_telegraph.gd",
+      "before": "74ec3e140c403242451c77118bb06e162fe9a5a5575602a6ee0713d88ad6298b",
+      "after": "af04fcf93bb653f61ad9d9bd30c283efc8a81e706485790bb6a69cbbe90e445d"
+    },
+    {
+      "path": "core/run/run_guide.gd",
+      "before": "26b2f158cca6122eda55eb1f1368f0fbd60e4e3e06b6adce730950c804c5ca1a",
+      "after": "ee24ffbcf7217a895d6777ffb153b03e6ca3c9f551dc6ab3bfa0cd9e32fee538"
+    },
+    {
+      "path": "core/settings_manager.gd",
+      "before": "f128f02f1efbe47f6dde990e2feca02d286c6f8b2cdd3441b7612c76da724516",
+      "after": "3013669b45b1fa28e501096bc0b63f96021b7be37ea0ba690cdfd2ab55dfb965"
+    },
+    {
+      "path": "docs/BUILD_STATUS.md",
+      "before": "610d7dd4db67876176663e47b3d844fa937f515c86bdb43bff9ac874914f2631",
+      "after": "59fc5a903440f243da07272115351518d46ed93693b312348b88cb6699d4d17e"
+    },
+    {
+      "path": "export_presets.cfg",
+      "before": "e4a8f2b6639bdbc778fd5f6261c64bba4496277f01c138d7b9049b43d5561563",
+      "after": "71de0fe3ad95d61641b47b4ab161014bcacd51b856468221ca9ba3a471769220"
+    },
+    {
+      "path": "project.godot",
+      "before": "2776be84950c072cc64af4cf95e24b3cc264f309a7f72cf9e7b546f57624ee67",
+      "after": "6347b5eff1250e64ba71986d8b7771d2b2e23a5e8c476ac6b8e4ad541eedbf24"
+    },
+    {
+      "path": "rendering/actor_readability.gd",
+      "before": "1b9318a70a3901b2de4a1e495735a89bbacc3cfb18a61a3d722bd4f9c4eb8b26",
+      "after": "31fc638178f557324a2d4d42b3ce746146e5fbceb5db42d07b1721a21fe272aa"
+    },
+    {
+      "path": "scenes/Main.tscn",
+      "before": "b351a5a5d7ac99e056078e8d2b4dd68b0c5e987a8af78d279505f37dd4567c18",
+      "after": "ad4cb18af9d88030ebf04c692f1e4bac58e07bc58664b9c87ee0bbdc958691b8"
+    },
+    {
+      "path": "scenes/Player.tscn",
+      "before": "6b7697e08c11b4fb3649f756d7eecceb0a74176b0e8f77553f16fc07dfcd8646",
+      "after": "25cb8cb5662fb097b56bc0edb55e280ecaad81777902f93519c3af9f4feb77e4"
+    },
+    {
+      "path": "scripts/city_generator.gd",
+      "before": "b01c66ca218e2829571a9ef2de7f15ed95b757f5679845ee9d5c3df54b6e4251",
+      "after": "0f470ba7b6a95804dbdeda5f88db0e6f4aaac6ca854086f7161d51bdc2f599fd"
+    },
+    {
+      "path": "scripts/game.gd",
+      "before": "c07a61fb4f1fd34ab16f88fdbd9373550179a870615503a1c92ec34dbe4ca986",
+      "after": "08657c41797f22c5275a0dce779ba8bdfacae72e0e9b2f630708ab86fb05b683"
+    },
+    {
+      "path": "shaders/ascii_post.gdshader",
+      "before": "794eaa62c53670948037c937b4d179534b8d9321263f4a62a69f12194e9681fa",
+      "after": "c23149b5e9106b60ac2e74388aceaa7b672b74e97ad190ce847f9df31e0885c0"
+    },
+    {
+      "path": "tests/living_city_test.gd",
+      "before": "96715a8bdcc7e919fabfd7f88ac4d08fdd3e120c1707a0ddafad8193cd148ed9",
+      "after": "0f42064747317d9aa96ef221e7bebda863182ccd92982e5ada9d712cd38d5c2c"
+    },
+    {
+      "path": "tools/run_debug_template_checks.py",
+      "before": "e5c83799b554f13eafcf8812c601cf53ab3c19c08084daf37fd381a71e44c63b",
+      "after": "7d19883e3259db20ee7dcc043d196e7d45f476588f00f312183ced201bf39f6d"
+    },
+    {
+      "path": "ui/settings_menu.gd",
+      "before": "eb938b5004475cb207b1726dbeb8eef527a89c2ef624179b84ebc0dbd6352069",
+      "after": "732b400ac6827016f3446b8c98a82296dc1820611180657749a68e0058d2bc90"
+    },
+    {
+      "path": "world/districts/living_city_pass.gd",
+      "before": "d4adea9ac041f429eae64033c56c96ad10a7bdaaed0c5ee5aa99f0b019aad4cc",
+      "after": "e781b02df8f783d5798f5995734191a4d984c57dd03c11dbcfc9bd6e59828b23"
+    },
+    {
+      "path": "world/encounter_director.gd",
+      "before": "d17faba544bbf29399cdae34bc404c232ca740c7d2d52a0884c88f7691549256",
+      "after": "ee3316a4cc2282ab1e09befeca1d28a3e84066fe4af66b78e7f3c3add4316707"
+    },
+    {
+      "path": "world/navigation/enemy_navigation.gd",
+      "before": "62474ac6ee9edc58b1d93f9c7c707911c530b3ee01a31cb9d9652ddf9f1624ab",
+      "after": "df3324db9239371d9883c8258346aed4b14d679f8d34f20a64c5229939f9e1b2"
+    },
+    {
+      "path": "world/navigation/layered_surface_query.gd",
+      "before": "0d0415f1c30d5f0b6bbdcf799a969e8ee2e8bceb6ead423f63a5df65bba06d70",
+      "after": "d6eeedd6dcdf4fcd2eadc3541d9f5f9e520db88cdba9b99b8699d1182600017c"
+    }
+  ],
+  "added": [
+    {
+      "path": "data/district_rules.gd",
+      "sha256": "dd866a0dd5d51cd9c11bbb45bf09673375d4bc9bfd19946a300bbaeda322f7f6"
+    },
+    {
+      "path": "docs/README_through_v012b.md",
+      "sha256": "86b9bf867feb815826333ff76a138320f95a2aa90ca29144d9ae2009d30398ea"
+    },
+    {
+      "path": "docs/RELEASE_v0_13.md",
+      "sha256": "3fd17c27063396af733a4bcc155ff269ef4fa31c7345844ae130fedcf67c7df0"
+    },
+    {
+      "path": "tests/district_depths_test.gd",
+      "sha256": "44f3edfabdb4e7e07fe9a645c6454915357449dcb0a930cec809f79ab142478d"
+    },
+    {
+      "path": "tests/district_events_test.gd",
+      "sha256": "6bb769ed62cbeafbcf1accbe7d408591292fe4f190f3e0137331cd9f3b73e3ea"
+    },
+    {
+      "path": "tests/fixtures/ascii_post_v012b.gdshader.txt",
+      "sha256": "794eaa62c53670948037c937b4d179534b8d9321263f4a62a69f12194e9681fa"
+    },
+    {
+      "path": "tests/protected_v012b_v013.json",
+      "sha256": "0466c2f61ae330bdc60fa898a54205497cea5f9cd1d33ad3c09a5e0084b5efe8"
+    },
+    {
+      "path": "tests/reference_city_capture.gd",
+      "sha256": "503b94789220363fd69ae74e97c5bac10f316350df229edbc44de556a9461175"
+    },
+    {
+      "path": "tests/reference_glyph_test.gd",
+      "sha256": "b287feac39355c3c6f5dc5a528430bfa56b4a4c4b91009126993e246c0d60167"
+    },
+    {
+      "path": "tests/route_probe.gd",
+      "sha256": "8dce8f9131d7b601cd8cd72a1819e38389f5dbdbed227852bd8eb748f37d6d31"
+    },
+    {
+      "path": "tests/settings_v013_test.gd",
+      "sha256": "2b1f96576e7a70a110f99a93743ef6e62803e239082d9e5dac0def06ac892330"
+    },
+    {
+      "path": "tests/test_v013.py",
+      "sha256": "d9eb80ecfb98713d105dfb9eafc2834a8a8d3538b9d3678ac25adb48b415eee9"
+    },
+    {
+      "path": "world/districts/ground_cutouts.gd",
+      "sha256": "352c0d7ca44587dda0f62536e96b07e01ee67467186735022ab5ddf42a233c25"
+    },
+    {
+      "path": "world/districts/reference_street.gd",
+      "sha256": "f7b7b4dc1fde65fc1aae96aec8deccb804ca248128e3ddba734c11ee5a312f2a"
+    },
+    {
+      "path": "world/districts/rooftop_relay.gd",
+      "sha256": "e2c9d4f9a0318b7445981eae464af583eb08589f8c9fed8647b5a022e52ad515"
+    },
+    {
+      "path": "world/districts/rooftop_relay.tscn",
+      "sha256": "ea867612ec88c7174a932aa5d3dd7fcc6dd904158ad164aadf91ffcd254a9862"
+    },
+    {
+      "path": "world/districts/utility_depths.gd",
+      "sha256": "7a177ef3efaf5fb6eb565973906a58011a2066b4d50e465474af9869acf2ea54"
+    },
+    {
+      "path": "world/districts/utility_depths.tscn",
+      "sha256": "3e0c410ccd7027b6209c91dedabf6c80069aeacd140f0179077f1c08e4b01b57"
+    },
+    {
+      "path": "world/events/district_events.gd",
+      "sha256": "8a7c7a1413a43ddc9c5865554ae89bf58b57db4252dd7d0f9d35619f0da6a706"
+    },
+    {
+      "path": "world/events/district_terminal.gd",
+      "sha256": "e84d985f360c932d8a19bed8c842094fbe187173845e820352e993ccc7f92744"
+    }
+  ],
+  "removed": [],
+  "protected_files": 67,
+  "note": "Excludes build/ outputs and Python/import caches. Historical test files and reports are retained as explicitly historical."
+}

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/enemy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"bomber"
+display_name = "BOMBER"
+move_speed = 3.15
+max_health = 62.0
+touch_damage = 30.0
+attack_interval = 0.2
+projectile_damage = 9.0
+projectile_speed = 13.0
+preferred_range = 10.0
+xp_reward = 18
+credit_reward = 7
+scale_multiplier = 1.02
+core_color = Color(1.0, 0.46, 0.02, 1)
+visual_profile = 3
+accent_color = Color(0.28, 0.14, 0.06, 1)
+stride_scale = 0.62
+bob_amount = 0.08
+attack_pose_scale = 1.25

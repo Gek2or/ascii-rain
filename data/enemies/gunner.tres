@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/enemy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"gunner"
+display_name = "GUNNER"
+move_speed = 2.8
+max_health = 52.0
+touch_damage = 7.0
+attack_interval = 1.48
+projectile_damage = 10.0
+projectile_speed = 14.5
+preferred_range = 12.0
+xp_reward = 16
+credit_reward = 6
+scale_multiplier = 0.95
+core_color = Color(1.0, 0.03, 0.18, 1)
+visual_profile = 2
+accent_color = Color(0.20, 0.10, 0.26, 1)
+stride_scale = 0.58
+bob_amount = 0.045
+attack_pose_scale = 1.0

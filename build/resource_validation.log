@@ -1,0 +1,9 @@
+STATIC VALIDATION OK
+GDScript files: 88
+Scenes: 16
+Data resources: 20
+Registered class_name types: 11
+Input actions checked: 11
+Autoloads checked: 5
+Pooling hooks: projectile + tracer OK
+All res:// references and resource load_steps are valid.

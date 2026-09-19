@@ -1,0 +1,30 @@
+test_all_district_rules_present (test_v013.CurrentRelease.test_all_district_rules_present) ... ok
+test_ambient_does_not_spawn_enemies (test_v013.CurrentRelease.test_ambient_does_not_spawn_enemies) ... ok
+test_basement_scan_below_floor (test_v013.CurrentRelease.test_basement_scan_below_floor) ... ok
+test_conservative_agent_fits_entry (test_v013.CurrentRelease.test_conservative_agent_fits_entry) ... ok
+test_delayed_utility_hazards_stay_below_ground (test_v013.CurrentRelease.test_delayed_utility_hazards_stay_below_ground) ... ok
+test_east_ascent_does_not_intersect_archive (test_v013.CurrentRelease.test_east_ascent_does_not_intersect_archive) ... ok
+test_event_state_guards (test_v013.CurrentRelease.test_event_state_guards) ... ok
+test_gap_is_not_old_grey_blanket (test_v013.CurrentRelease.test_gap_is_not_old_grey_blanket) ... ok
+test_glyph_shapes_do_not_crossfade (test_v013.CurrentRelease.test_glyph_shapes_do_not_crossfade) ... ok
+test_ground_and_collision_share_cuts (test_v013.CurrentRelease.test_ground_and_collision_share_cuts) ... ok
+test_long_bars_reserved_for_edges (test_v013.CurrentRelease.test_long_bars_reserved_for_edges) ... ok
+test_lower_and_upper_tagged_surfaces (test_v013.CurrentRelease.test_lower_and_upper_tagged_surfaces) ... ok
+test_migration_backups_and_no_archive_delete (test_v013.CurrentRelease.test_migration_backups_and_no_archive_delete) ... ok
+test_narrative_stays_selective (test_v013.CurrentRelease.test_narrative_stays_selective) ... ok
+test_native_tests_cover_real_movement (test_v013.CurrentRelease.test_native_tests_cover_real_movement) ... ok
+test_navigation_does_not_teleport (test_v013.CurrentRelease.test_navigation_does_not_teleport) ... ok
+test_no_engines_profiles_or_fonts_in_source_tree (test_v013.CurrentRelease.test_no_engines_profiles_or_fonts_in_source_tree) ... ok
+test_no_one_meter_gap_at_ramp_entry (test_v013.CurrentRelease.test_no_one_meter_gap_at_ramp_entry) ... ok
+test_no_street_fallback_for_lower_level (test_v013.CurrentRelease.test_no_street_fallback_for_lower_level) ... ok
+test_palette_coverage_increases_at_every_size (test_v013.CurrentRelease.test_palette_coverage_increases_at_every_size) ... ok
+test_protected_audio_story_controls_data (test_v013.CurrentRelease.test_protected_audio_story_controls_data) ... ok
+test_quality_does_not_change_tone (test_v013.CurrentRelease.test_quality_does_not_change_tone) ... ok
+test_six_districts_instantiated (test_v013.CurrentRelease.test_six_districts_instantiated) ... ok
+test_three_visual_styles (test_v013.CurrentRelease.test_three_visual_styles) ... ok
+test_version_main_and_save_identity (test_v013.CurrentRelease.test_version_main_and_save_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.018s
+
+OK
