@@ -170,7 +170,9 @@ func _run() -> void:
     _expect(_game.get_node("HUD/CompletePanel").visible, "result screen visible")
     _expect("CACHES 2" in str(_game.get_node("HUD/CompletePanel/Summary").text), "result counts claimed caches")
     _expect("NEW REALITY FRAGMENTS 1" in str(_game.get_node("HUD/CompletePanel/Summary").text), "result counts new archive records")
-    _game.call("_on_restart_pressed")
+    Input.action_press("restart_run")
+    await process_frame
+    Input.action_release("restart_run")
     for frame in range(15):
         await physics_frame
     _game = current_scene

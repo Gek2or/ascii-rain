@@ -28,7 +28,7 @@ These are captures from the supplied v0.19.1 project, not mockups.
 
 Or open `project.godot` in **Godot 4.7** and press **F5**. The repository contains the full Godot source; it does not include a Windows executable or Android APK.
 
-In the browser, click the game once to capture the mouse and focus controls. Then use **WASD** to move, **Mouse** to aim, **LMB** to fire, **RMB** to aim, **Space** to jump, **Shift** to dash, **E** to interact, **Q** or **1–3** to switch weapons, **Mouse wheel** to zoom, and **Esc** for settings.
+In the browser, click the game once to capture the mouse and focus controls. Then use **WASD** to move, **Mouse** to aim, **LMB** to fire, **RMB** to aim, **Space** to jump, **Shift** to dash, **E** to interact, **Q** or **1–3** to switch weapons, **Mouse wheel** to zoom, **Esc** for settings, and **R** to start a new run after a result screen.
 
 ## Project notes
 

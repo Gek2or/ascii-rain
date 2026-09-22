@@ -201,7 +201,10 @@ func apply_look_delta(delta_pixels: Vector2, sensitivity_scale: float = 1.0) -> 
         return
     var aim_sensitivity: float = 0.62 if Input.is_action_pressed("aim") else 1.0
     var final_sensitivity: float = mouse_sensitivity * SettingsManager.mouse_sensitivity_scale * sensitivity_scale * aim_sensitivity
-    _pending_yaw -= delta_pixels.x * final_sensitivity
+    if _is_mobile_runtime():
+        rotate_y(-delta_pixels.x * final_sensitivity)
+    else:
+        _pending_yaw -= delta_pixels.x * final_sensitivity
     _pitch = clamp(_pitch - delta_pixels.y * final_sensitivity, -1.05, 0.55)
     camera_pivot.rotation.x = _pitch
 

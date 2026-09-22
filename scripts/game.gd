@@ -150,7 +150,7 @@ func _apply_runtime_profile() -> void:
     if mobile_profile:
         controls_label.text = "TOUCH: MOVE / LOOK   FIRE / JUMP / DASH / WPN / USE / SET"
     else:
-        controls_label.text = "CLICK TO CAPTURE MOUSE  //  WASD MOVE  //  MOUSE AIM  //  LMB FIRE  //  SPACE JUMP  //  SHIFT DASH  //  ESC SETTINGS"
+        controls_label.text = "CLICK TO CAPTURE  //  WASD MOVE  //  MOUSE AIM  //  LMB FIRE  //  SPACE JUMP  //  SHIFT DASH  //  ESC SETTINGS  //  R RESTART"
 
     var material: ShaderMaterial = ascii_rect.material as ShaderMaterial
     if material != null:
@@ -311,6 +311,10 @@ func _process(delta: float) -> void:
         ascii_rect.visible = not ascii_rect.visible
         if _readability_renderer != null:
             _readability_renderer.call("set_effect_enabled", ascii_rect.visible)
+
+    if Input.is_action_just_pressed("restart_run") and (run_complete or player.health <= 0.0):
+        _on_restart_pressed()
+        return
 
     if run_complete or player.health <= 0.0:
         interaction_label.text = ""
